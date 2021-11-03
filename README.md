@@ -16,4 +16,4 @@ Modelo de sistema de información que soporte la **gestión de proyectos de inve
 
 - [Marcela Reyes](https://github.com/mreyesq)
 
->Misión Tic 2020 - ciclo 4 
+>Misión Tic 2021 - ciclo 4 
