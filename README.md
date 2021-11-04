@@ -1,9 +1,9 @@
-# ¡GestionProyectosInvestigacion!
+# Devtambulos
+
+## Gestión proyectos de investigación
 
 Modelo de sistema de información que soporte la **gestión de proyectos de investigación**.
 
-
-# Devtambulos
 ##  Integrantes:
 
 - [Angie Remolina](https://github.com/AngieRemolina)
@@ -16,4 +16,4 @@ Modelo de sistema de información que soporte la **gestión de proyectos de inve
 
 - [Marcela Reyes](https://github.com/mreyesq)
 
->Misión Tic 2021 - ciclo 4 
+>Misión Tic 2021 - Ciclo 4 
