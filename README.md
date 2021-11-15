@@ -8,6 +8,8 @@ Modelo de sistema de información que soporte la **gestión de proyectos de inve
 
 - [Angie Remolina](https://github.com/AngieRemolina)
 
+- [Faber Hoyos](https://github.com/faber28)
+
 - [Jose Pedraza](https://github.com/joalpe13)
 
 - [Juan Osorio](https://github.com/jfelipeo)
