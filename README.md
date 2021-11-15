@@ -8,6 +8,8 @@ Modelo de sistema de información que soporte la **gestión de proyectos de inve
 
 - [Angie Remolina](https://github.com/AngieRemolina)
 
+- [Faber Hoyos](https://github.com/faber28)
+
 - [Jose Pedraza](https://github.com/joalpe13)
 
 - [Juan Osorio](https://github.com/jfelipeo)
@@ -16,6 +18,6 @@ Modelo de sistema de información que soporte la **gestión de proyectos de inve
 
 - [Marcela Reyes](https://github.com/mreyesq)
 
-- [Faber Hoyos](https://github.com/faber28)
+
 
 >Misión Tic 2021 - Ciclo 4 
