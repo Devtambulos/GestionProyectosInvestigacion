@@ -1,7 +1,8 @@
 import React from 'react';
 
-const Page2 = () => {
-  return <div>Pagina 2</div>;
+const Avance = () => {
+  return <div>Avance</div>;
 };
 
-export default Page2;
+export default Avance;
+

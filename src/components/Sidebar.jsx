@@ -7,6 +7,7 @@ const SidebarLinks = () => {
       <Logo />
       <ul className="mt-12">
         <SidebarRoute to="/" title="Inicio" icon="fas fa-home" />
+
         <SidebarRoute to="/page2" title="Pagina2" icon="fas fa-smile-wink" />
         <SidebarRoute to="/category1" title="Catego 1" icon="fab fa-amazon" />
         <SidebarRoute to="/category1/page1" title="Test" icon="fas fa-car" />
@@ -78,7 +79,7 @@ const Logo = () => {
     <div className="py-3 w-full flex flex-col items-center justify-center">
       <img src="logo.png" alt="Logo" className="h-16" />
       <span className="my-2 text-xl font-bold text-center">
-        Título de Mi Aplicación
+        DEVPROJECT
       </span>
     </div>
   );
@@ -87,7 +88,7 @@ const Logo = () => {
 const Sidebar = () => {
   const [open, setOpen] = useState(true);
   return (
-    <aside className="bg-gray-200">
+    <aside className="bg-indigo-200">
       <div className="flex flex-col md:flex-row flex-no-wrap md:h-full">
         <div className="hidden md:flex">
           <div className="px-4">
@@ -115,7 +116,7 @@ const Sidebar = () => {
 
 const ResponsiveSidebar = () => {
   return (
-    <aside className="bg-gray-200">
+    <aside className="bg-indigo-200">
       <div
         className="text-black w-full md:h-full sm:hidden transition duration-150 ease-in-out"
         id="mobile-nav"
