@@ -7,7 +7,7 @@ const SidebarLinks = () => {
       <Logo />
       <ul className="mt-12">
         <SidebarRoute to="/" title="Inicio" icon="fas fa-home" />
-
+        <SidebarRoute to="/usuario" title="Usuarios" icon="fas fa-users" />
         <SidebarRoute to="/page2" title="Pagina2" icon="fas fa-smile-wink" />
         <SidebarRoute to="/category1" title="Catego 1" icon="fab fa-amazon" />
         <SidebarRoute to="/category1/page1" title="Test" icon="fas fa-car" />
@@ -24,6 +24,12 @@ const SidebarLinksHide = () => {
         title="Inicio"
         posicion="justify-center"
         icon="fas fa-home"
+      />
+      <SidebarRoute
+        to="/usuario"
+        title="Usuarios"
+        posicion="justify-center"
+        icon="fas fa-users"
       />
       <SidebarRoute
         to="/page2"
@@ -49,11 +55,16 @@ const SidebarLinksHide = () => {
 
 const SidebarLinksResponsive = () => {
   return (
-    <ul className="w-full flex flex-row grid grid-cols-4 gap-3 items-center justify-center">
+    <ul className="w-full  flex-row grid grid-cols-4 gap-3 items-center justify-center">
       <SidebarRoute
         to="/"
         title="Inicio"
         icon="fas fa-home"
+      />
+      <SidebarRoute
+        to="/usuario"
+        title="Usuarios"
+        icon="fas fa-users"
       />
       <SidebarRoute
         to="/page2"
@@ -77,9 +88,9 @@ const SidebarLinksResponsive = () => {
 const Logo = () => {
   return (
     <div className="py-3 w-full flex flex-col items-center justify-center">
-      <img src="logo.png" alt="Logo" className="h-16" />
+      <img src="DevProject_logo.png" alt="Logo" className="h-16" />
       <span className="my-2 text-xl font-bold text-center">
-        DEVPROJECT
+        DevProject
       </span>
     </div>
   );
@@ -116,7 +127,7 @@ const Sidebar = () => {
 
 const ResponsiveSidebar = () => {
   return (
-    <aside className="bg-indigo-200">
+    <aside className="bg-gray-200">
       <div
         className="text-black w-full md:h-full sm:hidden transition duration-150 ease-in-out"
         id="mobile-nav"
