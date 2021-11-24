@@ -8,6 +8,8 @@ import IndexCategory1 from 'pages/category1/Index';
 import Category1 from 'pages/category1/CategoryPage1';
 import 'styles/globals.css';
 import Usuario from 'pages/usuario/Index';
+import Registro from 'pages/auth/registro';
+import AuthLayout from 'layouts/AuthLayout';
 import { ApolloProvider, ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
 
 // const httpLink = createHttpLink({
@@ -33,6 +35,9 @@ function App() {
               <Route path='category1' element={<IndexCategory1 />} />
               <Route path='category1/page1' element={<Category1 />} />
             </Route>
+             <Route path='/auth' element={<AuthLayout />}>
+                <Route path='registro' element={<Registro />} />
+              </Route>
           </Routes>
         </BrowserRouter>
       </UserContext.Provider>
