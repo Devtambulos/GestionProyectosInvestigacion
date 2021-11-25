@@ -1,7 +1,7 @@
  import React, { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_USUARIOS } from 'graphql/usuarios/queries';
-//import { toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import { Enum_Rol, Enum_EstadoUsuario } from 'utils/enums';
 import 'styles/tabla.css';
@@ -13,9 +13,17 @@ const UsuarioIndex = () => {
     console.log('data servidor', data);
   }, [data]);
 
+  useEffect(() => {
+      if (error) {
+        toast.error('Error consultando los usuarios');
+      }
+    }, [error]);
+
+    if (loading) return <div>Cargando....</div>;
+
   return (
-    <div className="p-10 items-center font-serif text-black">
-      <div className="m-6 w-full justify-center text-center font-serif	font-black text-black">
+    <div className="p-8 items-center font-serif text-gray-800">
+      <div className="p-2 m-4 text-3xl font-serif text-gray-800 font-bold text-center w-full justify-center ">
         Datos Usuarios
       </div>
       <table className='tabla '>
@@ -42,7 +50,7 @@ const UsuarioIndex = () => {
                   <td>{Enum_Rol[u.rol]}</td>
                   <td>{Enum_EstadoUsuario[u.estado]}</td>
                   <td>
-                    <Link to={`/usuarios/editar/${u._id}`}>
+                     <Link to={`/usuarios/editar/${u._id}`}>
                       <i className='fas fa-pen text-green-400 hover:text-green-600 cursor-pointer
                        p-2 hover:bg-green-100 rounded-full' />
                     </Link>
