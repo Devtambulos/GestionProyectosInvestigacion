@@ -1,35 +1,42 @@
 import React, { useEffect } from "react";
 import useFormData from "hooks/useFormData";
-import { useNavigate } from 'react-router-dom'
-import { Link } from "react-router-dom"
-import Input from "components/Input"
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import Input from "components/Input";
 import ButtonLoading from "components/ButtonLoading";
 import { useMutation } from "@apollo/client";
 import { LOGIN } from "graphql/auth/mutation";
-
-
-
+import { useAuth } from "context/authContext";
 
 const Login = () => {
+  const { setToken } = useAuth();
+
   const navigate = useNavigate();
 
   const { form, formData, updateFormData } = useFormData();
 
-  const [login, {data: mutationData, loading: mutationLoading, error: mutationError}] = useMutation(LOGIN);
+  const [
+    login,
+    { data: dataMutation, loading: loadingMutation, error: errorMutation },
+  ] = useMutation(LOGIN);
 
   const submitForm = (e) => {
     e.preventDefault();
-    console.log("datosBack", formData)
+    console.log("datosBack", formData);
     login({
-      variables:formData,
-    })
+      variables: formData,
+    });
   };
 
-  useEffect(()=>{
-    if(mutationData){
-      console.log(mutationData)
+  useEffect(() => {
+    console.log("Data mutation", dataMutation);
+    if (dataMutation) {
+      if (dataMutation.login.token) {
+        setToken(dataMutation.login.token);
+        navigate("/");
+      }
     }
-  }, [mutationData])
+  }, [dataMutation, navigate, setToken]);
 
   return (
     <div className="flex flex-col items-center justify-center w-full h-full p-10">
@@ -49,7 +56,7 @@ const Login = () => {
         />
         <ButtonLoading
           disabled={Object.keys(formData).length === 0}
-          loading={mutationLoading}
+          loading={loadingMutation}
           text="Iniciar Sesión"
         />
       </form>

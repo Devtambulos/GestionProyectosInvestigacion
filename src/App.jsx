@@ -49,13 +49,16 @@ function App() {
   const [userData, setUserData] = useState({});
   const [authToken, setAuthToken] = useState('')
 
-  const setToken = () => {
-    
+  const setToken = (token) => {
+    setAuthToken(token)
+    if(token){
+      localStorage.setItem('token', JSON.stringify(token))
+    }
   }
   
   return (
     <ApolloProvider client={client}>
-      <AuthContext.Provider >
+      <AuthContext.Provider value={{setToken}}>
         <UserContext.Provider value={{ userData, setUserData }}>
           <BrowserRouter>
             <Routes>
