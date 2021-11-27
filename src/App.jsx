@@ -1,28 +1,8 @@
-<<<<<<< HEAD
-import React, { useState } from 'react';
-import PrivateLayout from 'layouts/PrivateLayout';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { UserContext } from 'context/userContext';
-import Index from 'pages/Index';
-import IndexCategory1 from 'pages/category1/Index';
-import Category1 from 'pages/category1/CategoryPage1';
-import 'styles/globals.css';
-import UsuarioIndex from 'pages/usuarios';
-import EditarUsuario from 'pages/usuarios/editar';
-import 'styles/globals.css';
-import 'styles/tabla.css';
-//import Registro from 'pages/auth/registro';
-//import AuthLayout from 'layouts/AuthLayout';
-import { ApolloProvider, ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
-import IndexAvances from 'pages/avances/Index';
-=======
 import React, { useState } from "react";
 import PrivateLayout from "layouts/PrivateLayout";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { UserContext } from "context/userContext";
 import Index from "pages/Index";
-import Page2 from "pages/Page2";
 import IndexCategory1 from "pages/category1/Index";
 import Category1 from "pages/category1/CategoryPage1";
 import "styles/globals.css";
@@ -42,7 +22,6 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { AuthContext } from "context/authContext";
->>>>>>> a19f34492aa32f1c692c5e7644011e10df7c8be7
 
 const httpLink = createHttpLink({
   uri: "http://localhost:4000/graphql",

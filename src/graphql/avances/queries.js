@@ -1,7 +1,7 @@
 import {gql} from '@apollo/client';
 
 const GET_ESTUDIANTES = gql`
-query Estudiantes {
+query Estudiantes ($rol: Enum_Rol!){
     FiltrarRol(rol:ESTUDIANTE) {
       _id
       nombre
