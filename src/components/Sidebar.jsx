@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "context/authContext";
+import PrivateComponent from "./PrivateComponent";
+import { useUser } from 'context/userContext';
+
 
 const SidebarLinks = () => {
   return (
@@ -7,10 +11,13 @@ const SidebarLinks = () => {
       <Logo />
       <ul className="mt-12">
         <SidebarRoute to="/" title="Inicio" icon="fas fa-home" />
-        <SidebarRoute to="/usuarios" title="Usuarios" icon="fas fa-users" />
+        <PrivateComponent roleList={['ADMINISTRADOR']}>
+          <SidebarRoute to="/usuarios" title="Usuarios" icon="fas fa-users" />
+        </PrivateComponent>
         <SidebarRoute to="/page2" title="Pagina2" icon="fas fa-smile-wink" />
         <SidebarRoute to="/category1" title="Catego 1" icon="fab fa-amazon" />
         <SidebarRoute to="/category1/page1" title="Test" icon="fas fa-car" />
+        <Logout />
       </ul>
     </div>
   );
@@ -49,7 +56,25 @@ const SidebarLinksHide = () => {
         posicion="justify-center"
         icon="fas fa-car"
       />
+      <Logout />
     </ul>
+  );
+};
+
+const Logout = () => {
+  const { setToken } = useAuth();
+  const deleteToken = () => {
+    setToken(null);
+  };
+  return (
+    <li onClick={() => deleteToken()} >
+      <NavLink to='/auth/login' className='sidebar-route text-red-700'>
+        <div className='flex items-center'>
+          <i className='fas fa-sign-out-alt' />
+          <span className='text-sm ml-2'>Cerrar Sesión</span>
+        </div>
+      </NavLink>
+    </li>
   );
 };
 
@@ -81,16 +106,18 @@ const SidebarLinksResponsive = () => {
         title="Test"
         icon="fas fa-car"
       />
+      <Logout />
     </ul>
   );
 };
 
 const Logo = () => {
+  
   return (
     <div className="py-3 w-full flex flex-col items-center justify-center">
       <img src="DevProject_logo.png" alt="Logo" className="h-16" />
       <span className="my-2 text-xl font-bold text-center">
-        DevProject
+        Debe ir el USUARIO
       </span>
     </div>
   );
@@ -132,7 +159,7 @@ const ResponsiveSidebar = () => {
         className="text-black w-full md:h-full sm:hidden transition duration-150 ease-in-out"
         id="mobile-nav"
       >
-          <SidebarLinksResponsive />
+        <SidebarLinksResponsive />
       </div>
     </aside>
   );
@@ -152,7 +179,7 @@ const SidebarRoute = ({ to, title, icon, posicion }) => {
         <div className={`w-full h-full flex items-center text-white hover:text-black`}>
           {posicion ? (
             <>
-              <i className={`${icon} text-gray-900 hover:text-white mx-2`}/>
+              <i className={`${icon} text-gray-900 hover:text-white mx-2`} />
               <label className="text-sm  ml-16 absolute font-semibold">{title}</label>
             </>
           ) : (
