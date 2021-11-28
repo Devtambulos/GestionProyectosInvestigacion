@@ -22,6 +22,7 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { AuthContext } from "context/authContext";
+import IndexAvances from "pages/avances/Index";
 
 const httpLink = createHttpLink({
   uri: "http://localhost:4000/graphql",
@@ -57,22 +58,6 @@ function App() {
   
   return (
     <ApolloProvider client={client}>
-<<<<<<< HEAD
-      <UserContext.Provider value={{ userData, setUserData }}>
-        <BrowserRouter>
-          <Routes>
-            <Route path='/' element={<PrivateLayout />}>
-              <Route path='' element={<Index />} />
-              <Route path='usuarios' element={<UsuarioIndex />} />
-              <Route path='/usuarios/editar/:_id' element={<EditarUsuario />} />
-              <Route path='avances' element={<IndexAvances/>} />
-              <Route path='category1' element={<IndexCategory1 />} />
-              <Route path='category1/page1' element={<Category1 />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </UserContext.Provider>
-=======
       <AuthContext.Provider value={{setToken}}>
         <UserContext.Provider value={{ userData, setUserData }}>
           <BrowserRouter>
@@ -84,7 +69,7 @@ function App() {
                   path="/usuarios/editar/:_id"
                   element={<EditarUsuario />}
                 />
-                <Route path="page2" element={<Page2 />} />
+                <Route path="avances" element={<IndexAvances/>} />
                 <Route path="category1" element={<IndexCategory1 />} />
                 <Route path="category1/page1" element={<Category1 />} />
               </Route>
@@ -96,7 +81,6 @@ function App() {
           </BrowserRouter>
         </UserContext.Provider>
       </AuthContext.Provider>
->>>>>>> a19f34492aa32f1c692c5e7644011e10df7c8be7
     </ApolloProvider>
   );
 }
