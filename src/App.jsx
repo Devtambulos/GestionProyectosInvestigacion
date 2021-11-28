@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PrivateLayout from "layouts/PrivateLayout";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { UserContext } from "context/userContext";
@@ -14,6 +14,7 @@ import "styles/tabla.css";
 import Registro from "pages/auth/registro";
 import AuthLayout from "layouts/AuthLayout";
 import Login from "pages/auth/login";
+import jwt_decode from "jwt-decode";
 
 import {
   ApolloProvider,
@@ -53,12 +54,32 @@ function App() {
     setAuthToken(token)
     if(token){
       localStorage.setItem('token', JSON.stringify(token))
+    }else{
+      localStorage.removeItem('token')
     }
   }
   
+  useEffect(()=>{
+    if(authToken){
+      /* console.log('Token: ',authToken) */
+      const decoded = jwt_decode(authToken)
+      /* console.log('jwtDecodeToken: ', jwt_decode(authToken)) */
+      setUserData({
+        _id: decoded._id,
+        nombre: decoded.nombre,
+        apellido: decoded.apellido,
+        identificacion: decoded.identificacion,
+        correo: decoded.correo,
+        rol: decoded.rol,
+
+      })
+    }
+    
+  },[authToken])
+
   return (
     <ApolloProvider client={client}>
-      <AuthContext.Provider value={{setToken}}>
+      <AuthContext.Provider value={{authToken, setAuthToken, setToken}}>
         <UserContext.Provider value={{ userData, setUserData }}>
           <BrowserRouter>
             <Routes>
