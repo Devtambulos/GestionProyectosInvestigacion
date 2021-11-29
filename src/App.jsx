@@ -47,7 +47,7 @@ const client = new ApolloClient({
 
 function App() {
   const [userData, setUserData] = useState({});
-  const [authToken, setAuthToken] = useState('')
+  const [authToken, setAuthToken] = useState('');
 
   const setToken = (token) => {
     setAuthToken(token)

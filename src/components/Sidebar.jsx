@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "context/authContext";
 import PrivateComponent from "./PrivateComponent";
-import { useUser } from 'context/userContext';
-
 
 const SidebarLinks = () => {
   return (
@@ -111,13 +109,13 @@ const SidebarLinksResponsive = () => {
   );
 };
 
-const Logo = () => {
+const Logo = () => {  
   
   return (
     <div className="py-3 w-full flex flex-col items-center justify-center">
       <img src="DevProject_logo.png" alt="Logo" className="h-16" />
       <span className="my-2 text-xl font-bold text-center">
-        Debe ir el USUARIO
+      "Podría ir el usuario"
       </span>
     </div>
   );
