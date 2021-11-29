@@ -1,10 +1,10 @@
 import { useUser } from "context/userContext";
 import React from "react";
 
-const PrivateRoute = ({ roleList, children }) => {
+const PrivateRoute = ({ roleList, authConfirm,children }) => {
   const { userData } = useUser();
 
-  if (roleList.includes(userData.rol)) {
+  if (roleList.includes(userData.rol) && userData.estado === "AUTORIZADO") {
     return children;
   }
 

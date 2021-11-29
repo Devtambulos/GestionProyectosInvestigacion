@@ -7,6 +7,8 @@ import { Enum_Rol, Enum_EstadoUsuario } from 'utils/enums';
 import 'styles/tabla.css';
 import PrivateRoute from 'components/PrivateRoute';
 
+import ReactLoading from 'react-loading';
+
 const UsuarioIndex = () => {
   const { data, error, loading } = useQuery(GET_USUARIOS);
 
@@ -20,7 +22,8 @@ const UsuarioIndex = () => {
       }
     }, [error]);
 
-    if (loading) return <div>Cargando....</div>;
+//para ver la ruedita mientras carga la info de usuarios
+if (loading) return <div className="flex justify-center items-center w-full h-full"><ReactLoading type='spin'color='blue' height={'20%'} width={'20%'} /> </div>;
 
   return (
     <PrivateRoute roleList={["LIDER","ADMINISTRADOR",]}>

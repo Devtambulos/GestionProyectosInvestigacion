@@ -63,7 +63,7 @@ function App() {
     if(authToken){
       /* console.log('Token: ',authToken) */
       const decoded = jwt_decode(authToken)
-      /* console.log('jwtDecodeToken: ', jwt_decode(authToken)) */
+      /*   */
       setUserData({
         _id: decoded._id,
         nombre: decoded.nombre,
@@ -71,12 +71,14 @@ function App() {
         identificacion: decoded.identificacion,
         correo: decoded.correo,
         rol: decoded.rol,
-
+        estado: decoded.estado
       })
     }
     
   },[authToken])
 
+
+  console.log("uD: ", userData)
   return (
     <ApolloProvider client={client}>
       <AuthContext.Provider value={{authToken, setAuthToken, setToken}}>
