@@ -5,6 +5,8 @@ import { UserContext } from "context/userContext";
 import Index from "pages/Index";
 import IndexCategory1 from "pages/category1/Index";
 import Category1 from "pages/category1/CategoryPage1";
+import Proyectos from "pages/proyecto/Index";
+import Proyecto from "pages/proyecto/Proyecto";
 import "styles/globals.css";
 import UsuarioIndex from "pages/usuarios";
 import EditarUsuario from "pages/usuarios/editar";
@@ -88,6 +90,8 @@ function App() {
               <Route path="/" element={<PrivateLayout />}>
                 <Route path="" element={<Index />} />
                 <Route path="usuarios" element={<UsuarioIndex />} />
+                <Route path="/proyectos" element={<Proyectos />} />
+                <Route path="/proyectos/:_id" element={<Proyecto />} />
                 <Route
                   path="/usuarios/editar/:_id"
                   element={<EditarUsuario />}
