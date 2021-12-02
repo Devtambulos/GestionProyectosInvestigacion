@@ -14,7 +14,9 @@ import Registro from "pages/auth/registro";
 import AuthLayout from "layouts/AuthLayout";
 import Login from "pages/auth/login";
 import jwt_decode from "jwt-decode";
-
+import IndexProyecto from 'pages/proyecto/Index'
+import Proyecto from "pages/proyecto/Proyecto";
+import ProyectoNuevo from "pages/proyecto/ProyectoNuevo";
 import {
   ApolloProvider,
   ApolloClient,
@@ -23,7 +25,6 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { AuthContext } from "context/authContext";
-import IndexAvances from "pages/avances/Index";
 
 const httpLink = createHttpLink({
   uri: "http://localhost:4000/graphql",
@@ -88,11 +89,13 @@ function App() {
               <Route path="/" element={<PrivateLayout />}>
                 <Route path="" element={<Index />} />
                 <Route path="usuarios" element={<UsuarioIndex />} />
+                <Route path="/proyectos/:_id" element={<Proyecto />} />
+                <Route path="/proyectos/crear/" element={<ProyectoNuevo />} />
                 <Route
                   path="/usuarios/editar/:_id"
                   element={<EditarUsuario />}
                 />
-                <Route path="avances" element={<IndexAvances/>} />
+                <Route path="proyectos" element={<IndexProyecto/>} />
                 <Route path="category1" element={<IndexCategory1 />} />
                 <Route path="category1/page1" element={<Category1 />} />
               </Route>

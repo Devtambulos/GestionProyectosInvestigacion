@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { useAuth } from "context/authContext"
+import { useAuth } from "context/authContext";
 import PrivateComponent from "./PrivateComponent";
 
 const SidebarLinks = () => {
@@ -9,34 +9,20 @@ const SidebarLinks = () => {
       <Logo />
       <ul className="mt-12">
         <SidebarRoute to="/" title="Inicio" icon="fas fa-home" />
+        <SidebarRoute to="/avances" title="Avances" icon="fas fa-smile-wink" />
         <PrivateComponent roleList={["ADMINISTRADOR", "LIDER"]}>
           <SidebarRoute to="/usuarios" title="Usuarios" icon="fas fa-users" />
         </PrivateComponent>
-        
-        <SidebarRoute to="/page2" title="Pagina2" icon="fas fa-smile-wink" />
+        <SidebarRoute
+          to="/proyectos"
+          title="Proyectos"
+          icon="fas fa-file-alt"
+        />
         <SidebarRoute to="/category1" title="Catego 1" icon="fab fa-amazon" />
         <SidebarRoute to="/category1/page1" title="Test" icon="fas fa-car" />
-        <Logout />
+        <Logout text="Cerrar Sesión"/>
       </ul>
     </div>
-  );
-};
-
-const Logout = () => {
-  const { setToken } = useAuth();
-  const deleteToken = () => {
-    console.log('eliminar token');
-    setToken(null);
-  };
-  return (
-    <li onClick={() => deleteToken()}>
-      <NavLink to='/auth/login' className='sidebar-route text-red-700'>
-        <div className='flex items-center'>
-          <i className='fas fa-sign-out-alt' />
-          <span className='text-sm  ml-2'>Cerrar Sesión</span>
-        </div>
-      </NavLink>
-    </li>
   );
 };
 
@@ -73,58 +59,36 @@ const SidebarLinksHide = () => {
         posicion="justify-center"
         icon="fas fa-car"
       />
-      
+      <Logout text=""/>
     </ul>
   );
 };
 
 const SidebarLinksResponsive = () => {
   return (
-    <ul className="w-full  flex-row grid grid-cols-4 gap-3 items-center justify-center">
-      <SidebarRoute
-        to="/"
-        title="Inicio"
-        icon="fas fa-home"
-      />
-      <SidebarRoute
-        to="/usuarios"
-        title="Usuarios"
-        icon="fas fa-users"
-      />
-      <SidebarRoute
-        to="/page2"
-        title="Pagina2"
-        icon="fas fa-smile-wink"
-      />
-      <SidebarRoute
-        to="/category1"
-        title="Catego 1"
-        icon="fab fa-amazon"
-      />
-      <SidebarRoute
-        to="/category1/page1"
-        title="Test"
-        icon="fas fa-car"
-      />
-
-      <SidebarRoute
-        to="/category1/page1"
-        title="Test"
-        icon="fas fa-car"
-      />
+    <ul className="w-full items-center justify-center">
+        <SidebarRoute to="/" title="Inicio" icon="fas fa-home" />
+        <SidebarRoute to="/avances" title="Avances" icon="fas fa-smile-wink" />
+        <PrivateComponent roleList={["ADMINISTRADOR", "LIDER"]}>
+          <SidebarRoute to="/usuarios" title="Usuarios" icon="fas fa-users" />
+        </PrivateComponent>
+        <SidebarRoute
+          to="/proyectos"
+          title="Proyectos"
+          icon="fas fa-file-alt"
+        />
+        <SidebarRoute to="/category1" title="Catego 1" icon="fab fa-amazon" />
+        <SidebarRoute to="/category1/page1" title="Test" icon="fas fa-car" />
+        <Logout text="Cerrar Sesión"/>
     </ul>
   );
 };
-
-
 
 const Logo = () => {
   return (
     <div className="py-3 w-full flex flex-col items-center justify-center">
       <img src="DevProject_logo.png" alt="Logo" className="h-16" />
-      <span className="my-2 text-xl font-bold text-center">
-        DevProject
-      </span>
+      <span className="my-2 text-xl font-bold text-center">DevProject</span>
     </div>
   );
 };
@@ -136,36 +100,50 @@ const Sidebar = () => {
       <div className="flex flex-col md:flex-row flex-no-wrap md:h-full">
         <div className="hidden md:flex">
           <div className="px-4">
-            <div className="flex flex-col w-full items-center justify-center pt-5 pb-5">
+            <div
+              className={`flex flex-col w-full items-${
+                open ? "end" : "center"
+              } justify-center pt-5 pb-5`}
+            >
               <i
                 onClick={() => setOpen(!open)}
-                className={`cursor-pointer fas fa-${open ? "times" : "bars"}`}
+                className={`cursor-pointer fas fa-${
+                  open ? "fas fa-chevron-circle-left" : "bars"
+                }`}
               ></i>
             </div>
             {open ? <SidebarLinks /> : <SidebarLinksHide />}
           </div>
         </div>
-        <div className="flex md:hidden w-full justify-between bg-gray-800 p-2 text-white">
-          <i
-            className={`fas fa-${open ? "times" : "bars"}`}
-            onClick={() => setOpen(!open)}
-          />
-          <i className="fas fa-home" />
-        </div>
-        {open && <ResponsiveSidebar />}
+        {<ResponsiveSidebar />}
       </div>
     </aside>
   );
 };
 
 const ResponsiveSidebar = () => {
+  const [open, setOpen] = useState(true);
   return (
     <aside className="bg-gray-200">
       <div
         className="text-black w-full md:h-full sm:hidden transition duration-150 ease-in-out"
         id="mobile-nav"
       >
-          <SidebarLinksResponsive />
+        <div className="px-4">
+          <div
+            className={`flex flex-col w-full items-${
+              open ? "end" : "center"
+            } justify-center pt-5 pb-5`}
+          >
+            <i
+              onClick={() => setOpen(!open)}
+              className={`cursor-pointer fas fa-${
+                open ? "fas fa-angle-left" : "bars"
+              }`}
+            ></i>
+          </div>
+        </div>
+        <SidebarLinksResponsive />
       </div>
     </aside>
   );
@@ -182,18 +160,40 @@ const SidebarRoute = ({ to, title, icon, posicion }) => {
             : "sidebar-route hover:bg-indigo-400"
         }
       >
-        <div className={`w-full h-full flex items-center text-white hover:text-black`}>
+        <div
+          className="w-full h-full flex items-center text-gray-900 hover:text-white"
+        >
           {posicion ? (
             <>
-              <i className={`${icon} text-gray-900 hover:text-white mx-2`}/>
-              <label className="text-sm  ml-16 absolute font-semibold">{title}</label>
+              <i className={`${icon} mx-2`} />
+              {/* <label className="text-sm pl-16 font-semibold absolute invisible">
+                {title}
+              </label> */}
             </>
           ) : (
             <>
-              <i className={`${icon} text-gray-900 hover:text-white`} />
-              <span className={`text-sm  ml-2 text-gray-900`}>{title}</span>
+              <i className={`${icon}`} />
+              <span className={`text-sm  ml-2`}>{title}</span>
             </>
           )}
+        </div>
+      </NavLink>
+    </li>
+  );
+};
+
+const Logout = ({text}) => {
+  const { setToken } = useAuth();
+  const deleteToken = () => {
+    console.log("eliminar token");
+    setToken(null);
+  };
+  return (
+    <li onClick={() => deleteToken()}>
+      <NavLink to="/auth/login" className="sidebar-route text-red-700">
+        <div className="flex items-center">
+          <i className="fas fa-sign-out-alt" />
+          <span className="text-sm  ml-2">{text}</span>
         </div>
       </NavLink>
     </li>
