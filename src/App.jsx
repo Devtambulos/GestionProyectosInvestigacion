@@ -77,8 +77,10 @@ function App() {
     
   },[authToken])
 
+  
 
-  console.log("uD: ", userData)
+
+
   return (
     <ApolloProvider client={client}>
       <AuthContext.Provider value={{authToken, setAuthToken, setToken}}>
