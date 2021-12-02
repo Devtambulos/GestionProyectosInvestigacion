@@ -41,6 +41,8 @@ if (loading) return <div className="flex justify-center items-center w-full h-fu
               <th>Estado</th>
               <th>Fase</th>
               <th>Lider</th>
+              <th>Objetivos</th>
+              <th>Avances</th>
               <th>Editar</th>
             </tr>
           </thead>
@@ -56,10 +58,21 @@ if (loading) return <div className="flex justify-center items-center w-full h-fu
                     <td>{u.estado}</td>
                     <td>{u.fase}</td>
                     <td>
-                    <div> id: {u.lider._id}</div>
-                    <div>{u.lider.nombre}</div>
-                    <div>{u.lider.apellido}</div>
-                    <div>{u.lider.identificacion}</div>
+                      <div> id: {u.lider._id}</div>
+                      <div>{u.lider.nombre}</div>
+                      <div>{u.lider.apellido}</div>
+                      <div>{u.lider.identificacion}</div>
+                    </td>
+                    <td>
+                      <div> id: {u.objetivos._id}</div>
+                      <div>{u.objetivos.descripcion}</div>
+                      <div>{u.objetivos.tipo}</div>
+                    </td>
+                    <td>
+                      <div>id: {u.avances._id}</div>
+                      <div>{u.avances.fecha}</div>
+                      <div>{u.avances.descripcion}</div>
+                      <div>{u.avances.observaciones}</div>
                     </td>
                     <td>
                       <Link to={`/usuarios/editar/${u._id}`}>

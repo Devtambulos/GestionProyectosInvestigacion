@@ -16,6 +16,17 @@ query Query {
         apellido
         identificacion
       }
+      objetivos {
+        _id
+        descripcion
+        tipo
+      }
+      avances {
+        _id
+        fecha
+        descripcion
+        observaciones
+      }
     }
   }
 `
