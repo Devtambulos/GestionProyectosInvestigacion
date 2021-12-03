@@ -1,0 +1,42 @@
+.headerInicio{
+    border-top: 1px #000 solid;
+    border-bottom: 1px #000 solid;
+    
+}
+
+.containerNavBar{
+    padding: 0;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.headerMain{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.containerTitulo{
+    grid-column: 1 / 2;
+    grid-row: 1;
+    padding: 7%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    
+}
+
+.textTitulo{
+    padding:1%;
+    width: 100%;
+    text-align: center;
+
+}
+
+.titulo{
+
+}
+
+.imgHeader{
+    grid-column: 2 / 3;
+    grid-row: 1;
+}

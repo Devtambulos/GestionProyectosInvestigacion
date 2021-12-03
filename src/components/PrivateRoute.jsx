@@ -2,7 +2,7 @@ import React,{useLocation} from "react";
 import { useUser } from "context/userContext";
 import { Link } from "react-router-dom";
 import { useAuth } from "context/authContext"
-import ".././styles/j.css"
+import ".././styles/privateRoute.css"
 
 
 
@@ -19,10 +19,10 @@ const PrivateRoute = ({ roleList, authConfirm, children }) => {
 
   return (
     <div className="flex flex-wrap w-full h-full justify-center items-center lg:px-32 md:p-5 sm:p-7 xs">
-      <h1 className="text-indigo-500 font-bold text-5xl">
+      <h1 className="text-indigo-500 font-bold text-5xl text-center">
         Lo sentimos pero no estás autorizado para ver este sitio.
       </h1>
-      <p className="font-bold text-2xl">
+      <p className="font-bold text-2xl text-center">
         No tienes los permisos necesarios para ingresar a este sitio, si crees
         que se trata de un error comunicate con un administrador o en la parte de abajo podras encontrar algunos links que pueden ser de tu interes:
 
