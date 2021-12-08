@@ -32,7 +32,7 @@ const PrivateLayout = () => {
 
       }else{
         setToken(null)
-        navigate('/auth/login')
+        navigate('/inicio')
       }
       setLoadingAuth(false)
     }

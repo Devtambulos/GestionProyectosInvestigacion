@@ -190,7 +190,7 @@ const Logout = ({text}) => {
   };
   return (
     <li onClick={() => deleteToken()}>
-      <NavLink to="/auth/login" className="sidebar-route text-red-700">
+      <NavLink to="/inicio" className="sidebar-route text-red-700">
         <div className="flex items-center">
           <i className="fas fa-sign-out-alt" />
           <span className="text-sm  ml-2">{text}</span>
