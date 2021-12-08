@@ -148,7 +148,7 @@ const CardsDesarrolladores = () => {
             </div>
             <div className="flex flex-wrap">
               {dev.nombreRedSocial2 && dev.enlaceRedSocial2 !== null ? (
-                <>
+                <div className="flex flex-wrap justify-center">
                   <BotonRedirigir
                     nombre={dev.nombreRedSocial1}
                     url={dev.enlaceRedSocial1}
@@ -157,12 +157,14 @@ const CardsDesarrolladores = () => {
                     nombre={dev.nombreRedSocial2}
                     url={dev.enlaceRedSocial2}
                   />
-                </>
+                </div>
               ) : (
-                <BotonRedirigir
-                  nombre={dev.nombreRedSocial1}
-                  url={dev.enlaceRedSocial1}
-                />
+                <div>
+                  <BotonRedirigir
+                    nombre={dev.nombreRedSocial1}
+                    url={dev.enlaceRedSocial1}
+                  />
+                </div>
               )}
             </div>
           </div>
