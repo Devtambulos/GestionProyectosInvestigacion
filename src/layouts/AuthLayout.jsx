@@ -1,4 +1,6 @@
 import React from 'react';
+import { ToastContainer } from "react-toastify";
+
 import { Outlet } from 'react-router';
 
 const AuthLayout = () => {
@@ -9,6 +11,7 @@ const AuthLayout = () => {
           <Outlet />
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
