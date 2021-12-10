@@ -17,6 +17,7 @@ import jwt_decode from "jwt-decode";
 import IndexProyecto from 'pages/proyecto/Index'
 import Proyecto from "pages/proyecto/Proyecto";
 import ProyectoNuevo from "pages/proyecto/ProyectoNuevo";
+import PaginaInicial from "pages/inicial/index"
 import {
   ApolloProvider,
   ApolloClient,
@@ -78,8 +79,10 @@ function App() {
     
   },[authToken])
 
+  
 
-  console.log("uD: ", userData)
+
+
   return (
     <ApolloProvider client={client}>
       <AuthContext.Provider value={{authToken, setAuthToken, setToken}}>
@@ -103,6 +106,7 @@ function App() {
                 <Route path="register" element={<Registro />} />
                 <Route path="login" element={<Login />} />
               </Route>
+              <Route path="/inicio" element={<PaginaInicial />}  />
             </Routes>
           </BrowserRouter>
         </UserContext.Provider>

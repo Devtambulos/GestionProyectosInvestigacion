@@ -40,7 +40,12 @@ const Registro = () => {
   }, [dataMutation, navigate, setToken]);
 
   return (
-    <div className="flex flex-col h-full w-full items-center justify-center">
+    <div className="flex  flex-col h-full w-full p-14 items-center justify-center">
+      <div className="justify-self-start self-start">
+        <Link to='/inicio'>
+          <i className='fas fa-arrow-left text-gray-600 cursor-pointer font-bold text-xl hover:text-gray-900' />
+        </Link>
+      </div>
       <h1 className="text-3xl font-bold my-4">Regístrate</h1>
       <form
         className="flex flex-col"

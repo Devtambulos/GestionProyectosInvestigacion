@@ -32,23 +32,22 @@ const PrivateLayout = () => {
 
       }else{
         setToken(null)
-        navigate('/auth/login')
+        navigate('/inicio')
       }
       setLoadingAuth(false)
     }
   },[dataMutation, setToken, setLoadingAuth, navigate])
 
-  useEffect(()=>{
+
+  /* useEffect(()=>{
     console.log('token actual', authToken)
     console.log('lm', loadingMutation)
     console.log('la',loadingAuth);
-  }, [authToken,loadingMutation, loadingAuth])
+  }, [authToken,loadingMutation, loadingAuth]) */
+
 
   if(loadingMutation ) return <div>Cargando...</div>
 
-  /* if(!authToken){
-    navigate('/auth/login')
-  }  */
 
   return (
     <div className="flex flex-col md:flex-row flex-no-wrap h-screen">
