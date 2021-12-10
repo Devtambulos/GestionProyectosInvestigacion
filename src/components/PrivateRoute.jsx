@@ -57,12 +57,12 @@ const Logout = () => {
   };
   return (
     <button onClick={() => deleteToken()}>
-      <Link to='/inicio' className='sidebar-route text-red-700'>
+      <a href='/inicio' className='sidebar-route text-red-700'>
         <div className='flex items-center'>
           <i className='fas fa-sign-out-alt' />
           <span className='text-sm  m-5'>Cerrar Sesión</span>
         </div>
-      </Link>
+      </a>
     </button>
   );
 };

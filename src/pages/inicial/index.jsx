@@ -142,9 +142,9 @@ const CardsDesarrolladores = () => {
               <img src={dev.img} alt="imgDev" />
             </image>
             <div className="flex flex-col flex-auto items-center justify-center">
-              <p className="text-white text-center">{dev.nombre}</p>
-              <p className="text-white text-center">{dev.correo}</p>
-              <p className="text-white text-center">{dev.otros}</p>
+              <p className="text-white text-center">{dev.campo1}</p>
+              <p className="text-white text-center">{dev.campo2}</p>
+              <p className="text-white text-center">{dev.campo3}</p>
             </div>
             <div className="flex flex-wrap">
               {dev.nombreRedSocial2 && dev.enlaceRedSocial2 !== null ? (

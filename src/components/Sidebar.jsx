@@ -190,12 +190,13 @@ const Logout = ({text}) => {
   };
   return (
     <li onClick={() => deleteToken()}>
-      <NavLink to="/inicio" className="sidebar-route text-red-700">
+      <a href="/inicio" className="sidebar-route text-red-700">
         <div className="flex items-center">
           <i className="fas fa-sign-out-alt" />
+          
           <span className="text-sm  ml-2">{text}</span>
         </div>
-      </NavLink>
+      </a>
     </li>
   );
 };
