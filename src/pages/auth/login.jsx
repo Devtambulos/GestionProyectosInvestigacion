@@ -44,7 +44,8 @@ const Login = () => {
   useEffect(()=>{
     if (dataMutation) {
       if (dataMutation.login.error) {
-        toast.error('Error, alguno de los campos que ingresaste es invalido: Correo o contraseña');
+        toast.error('Error: ingresaste un dato erroneo');
+        toast.info('Prueba ingresando tu email y/o contraseña correctamente')
       }
     }
   },[dataMutation])
