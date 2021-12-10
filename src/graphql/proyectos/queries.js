@@ -29,7 +29,7 @@ query Query {
       }
     }
   }
-`
+`;
 
 const GET_PROYECTO = gql`
   query Proyecto($_id: String!) {
