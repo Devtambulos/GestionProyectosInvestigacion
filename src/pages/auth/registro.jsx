@@ -9,6 +9,7 @@ import { REGISTRO } from "graphql/auth/mutation";
 import { useMutation } from "@apollo/client";
 import { useNavigate } from "react-router";
 import { useAuth } from "context/authContext";
+import { toast } from 'react-toastify';
 
 const Registro = () => {
   const { setToken } = useAuth();
@@ -38,6 +39,17 @@ const Registro = () => {
       }
     }
   }, [dataMutation, navigate, setToken]);
+
+  useEffect(()=>{
+    console.log("0 error", errorMutation)
+    if(errorMutation || dataMutation){
+      if(errorMutation || dataMutation.registro.error){
+        toast.error('Error: Ingresaste un dato invalido');
+        toast.info('Prueba ingresando otro correo y/o tu documento de identidad correctamente')
+        console.log("1 error", errorMutation)
+      }
+    }
+  },[errorMutation, dataMutation])
 
   return (
     <div className="flex  flex-col h-full w-full p-14 items-center justify-center">

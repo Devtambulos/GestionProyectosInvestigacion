@@ -1,7 +1,7 @@
 export const datosDevs = [
     {
         "id": 1,
-        "img":"https://lh3.googleusercontent.com/pw/AM-JKLWYrbIYzVJNZlDTq_u0eInfgnR8jAH-tcqSKP9ZMqX_w1JUw9OB6O244_T4VcxOr7-ypKnfffKSU_Xvb1t8WtuOABfcK_OnVYRRqYuXD4Qzw7zeb5DoWmK7wYcQPA4oNTXgZH1FM0qwJAAU7EvNMIZcfw=s625-no?authuser=0",
+        "img":"https://cdn-icons-png.flaticon.com/512/1540/1540019.png",/* https://lh3.googleusercontent.com/pw/AM-JKLWYrbIYzVJNZlDTq_u0eInfgnR8jAH-tcqSKP9ZMqX_w1JUw9OB6O244_T4VcxOr7-ypKnfffKSU_Xvb1t8WtuOABfcK_OnVYRRqYuXD4Qzw7zeb5DoWmK7wYcQPA4oNTXgZH1FM0qwJAAU7EvNMIZcfw=s625-no?authuser=0 */
         "nombre": "Juan Pablo Roldán Patiño",
         "correo": "jpabloroldanp@gmail.com",
         "otros": "18 años",
