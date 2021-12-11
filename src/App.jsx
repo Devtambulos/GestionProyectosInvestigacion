@@ -98,9 +98,6 @@ function App() {
                 <Route path="/proyectos/:_id" element={<Proyecto />} />
                 <Route path="/proyectos/crear/" element={<ProyectoNuevo />} />
                 <Route path="/proyectos/editar/:_id" element={<EditarProyecto/>} />
-
-                <Route path="category1" element={<IndexCategory1 />} />
-                <Route path="category1/page1" element={<Category1 />} />
               </Route>
               <Route path="/auth" element={<AuthLayout />}>
                 <Route path="register" element={<Registro />} />
