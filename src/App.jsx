@@ -26,6 +26,7 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { AuthContext } from "context/authContext";
+import EditarProyecto from "./pages/proyecto/editarProyecto";
 
 const httpLink = createHttpLink({
   uri: "http://localhost:4000/graphql",
@@ -92,13 +93,12 @@ function App() {
               <Route path="/" element={<PrivateLayout />}>
                 <Route path="" element={<Index />} />
                 <Route path="usuarios" element={<UsuarioIndex />} />
+                <Route path="/usuarios/editar/:_id" element={<EditarUsuario />} />
+                <Route path="proyectos" element={<IndexProyecto/>} />
                 <Route path="/proyectos/:_id" element={<Proyecto />} />
                 <Route path="/proyectos/crear/" element={<ProyectoNuevo />} />
-                <Route
-                  path="/usuarios/editar/:_id"
-                  element={<EditarUsuario />}
-                />
-                <Route path="proyectos" element={<IndexProyecto/>} />
+                <Route path="/proyectos/editar/:_id" element={<EditarProyecto/>} />
+
                 <Route path="category1" element={<IndexCategory1 />} />
                 <Route path="category1/page1" element={<Category1 />} />
               </Route>

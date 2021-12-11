@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { GET_PROYECTO } from 'graphql/proyectos/queries';
 import { useQuery} from '@apollo/client';
 import { toast } from 'react-toastify';
@@ -28,7 +28,14 @@ const Proyecto = () => {
       NOMBRE: {data.Proyecto.nombre}
       <br/>
       LIDER: {data.Proyecto.lider.nombre}
+      <br/>
+      <Link to={`/proyectos/editar/${data.Proyecto._id}`}>
+                        <i className='fas fa-pen text-green-400 hover:text-green-600 cursor-pointer
+                        p-2 hover:bg-green-100 rounded-full' />
+      </Link>
     </div>
+    
+
   );
 };
 
