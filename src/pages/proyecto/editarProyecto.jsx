@@ -10,7 +10,6 @@ import { toast } from 'react-toastify';
 import DropDown from 'components/Dropdown';
 import { Enum_FaseProyecto } from 'utils/enums';
 import { Enum_EstadoProyecto } from 'utils/enums';
-import { parse } from 'postcss';
 
 const EditarProyecto = () => {
   const { form, formData, updateFormData } = useFormData();
@@ -63,7 +62,6 @@ const EditarProyecto = () => {
   
     return (
       <div className='flew flex-col w-full h-full items-center justify-center p-10'>
-          editar proyectos
         <Link to={`/proyectos/${queryData.Proyecto._id}`}>
           <i className='fas fa-arrow-left text-gray-600 cursor-pointer font-bold text-xl hover:text-gray-900' />
         </Link>
