@@ -5,6 +5,7 @@ import { useQuery} from '@apollo/client';
 import { toast } from 'react-toastify';
 import ReactLoading from 'react-loading';
 import { GET_OBJETIVOS } from "graphql/objetivos/queries";
+import {Enum_TipoObjetivo} from "../../utils/enums"
 
 const Proyecto = () => {
   const {_id} = useParams();
@@ -24,9 +25,9 @@ const Proyecto = () => {
   const {
     data: dataObjetivos,
     error: errorObjetivos,
-    loading: loadingObjetivos } = useQuery(GET_OBJETIVOS, {
-   variables: { _id },
- });
+    loading: loadingObjetivos } = useQuery(GET_OBJETIVOS,{
+      variables: { _id} ,
+    });
 
  
  console.log("Datos de Objetivos:", dataObjetivos);
@@ -68,8 +69,7 @@ const Proyecto = () => {
       ESTADO: {dataProyecto.Proyecto.estado }
     {/* OBJETIVOS DEL PROYECTO*/}
     <div>
-    <h1 className='m-4 text-3xl text-gray-800 font-bold text-center'>Objetivos</h1>
-    {/* <PrivateRoute roleList={["LIDER","ADMINISTRADOR",]}>
+    {/* <PrivateRoute roleList={["LIDER","ADMINISTRADOR",]}> */}
       <div className="p-8 items-center font-serif text-gray-800">
         <div className="p-2 m-4 text-3xl font-serif text-gray-800 font-bold text-center w-full justify-center ">
           Objetivos
@@ -77,7 +77,6 @@ const Proyecto = () => {
         <table className='tabla '>
           <thead>
             <tr>
-              <th>ID</th>
               <th>DESCRIPCION</th>
               <th>TIPO</th>
               <th>EDITAR</th>
@@ -85,15 +84,12 @@ const Proyecto = () => {
           </thead>
           <tbody>
             {dataObjetivos &&
-              dataObjetivos.Usuarios.map((u) => {
+              dataObjetivos.filtrarObjetivo.map((u) => {
+      
                 return (
                   <tr key={u._id}>
-                    <td>{u.nombre}</td>
-                    <td>{u.apellido}</td>
-                    <td>{u.correo}</td>
-                    <td>{u.identificacion}</td>
-                    <td>{Enum_Rol[u.rol]}</td>
-                    <td>{Enum_EstadoUsuario[u.estado]}</td>
+                    <td>{u.descripcion}</td>
+                    <td>{Enum_TipoObjetivo[u.tipo]}</td>
                     <td>
                       <Link to={`/usuarios/editar/${u._id}`}>
                         <i className='fas fa-pen text-green-400 hover:text-green-600 cursor-pointer
@@ -106,7 +102,7 @@ const Proyecto = () => {
           </tbody>
         </table>
       </div>
-    </PrivateRoute> */}
+    {/* </PrivateRoute> */}
     </div>
     {/* AVANCES DEL PROYECTO */}
     <div>

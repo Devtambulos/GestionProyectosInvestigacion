@@ -58,6 +58,12 @@ const GET_PROYECTO = gql`
         descripcion
         observaciones
       }
+      inscripciones {
+        _id
+        estado
+        fechaIngreso
+        fechaEgreso
+      }
     }
   }
 `;
