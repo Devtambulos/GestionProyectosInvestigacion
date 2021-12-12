@@ -29,7 +29,7 @@ query Query {
       }
     }
   }
-`
+`;
 
 const GET_PROYECTO = gql`
   query Proyecto($_id: String!) {
@@ -57,6 +57,12 @@ const GET_PROYECTO = gql`
         fecha
         descripcion
         observaciones
+      }
+      inscripciones {
+        _id
+        estado
+        fechaIngreso
+        fechaEgreso
       }
     }
   }

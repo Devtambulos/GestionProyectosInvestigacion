@@ -31,6 +31,7 @@ const IndexProyecto = () => {
       </div>
     );
 
+    
   return (
     <PrivateRoute roleList={["LIDER", "ADMINISTRADOR"]}>
       <div className="p-8 items-center font-serif text-gray-800">
@@ -41,7 +42,7 @@ const IndexProyecto = () => {
           <PrivateComponent roleList={["ADMINISTRADOR", "LIDER"]}>
             <CardNew />
           </PrivateComponent>
-          {data.Proyectos.map((proyecto) => {
+          {data && data.Proyectos.map((proyecto) => {
             return (
               <Card
                 Key={proyecto._id}

@@ -7,6 +7,8 @@ import ButtonLoading from "components/ButtonLoading";
 import { useMutation } from "@apollo/client";
 import { LOGIN } from "graphql/auth/mutation";
 import { useAuth } from "context/authContext";
+import { toast } from 'react-toastify';
+
 
 const Login = () => {
   const { setToken } = useAuth();
@@ -38,8 +40,23 @@ const Login = () => {
     }
   }, [dataMutation, navigate, setToken]);
 
+
+  useEffect(()=>{
+    if (dataMutation) {
+      if (dataMutation.login.error) {
+        toast.error('Error: ingresaste un dato erroneo');
+        toast.info('Prueba ingresando tu email y/o contraseña correctamente')
+      }
+    }
+  },[dataMutation])
+
   return (
-    <div className="flex flex-col items-center justify-center w-full h-full p-10">
+    <div className="flex flex-col h-full w-full p-14 items-center justify-center">
+      <div className="justify-self-start self-start">
+        <Link to='/inicio'>
+          <i className='fas fa-arrow-left text-gray-600 cursor-pointer font-bold text-xl hover:text-gray-900' />
+        </Link>
+      </div>
       <h1 className="text-xl font-bold text-gray-900">Iniciar sesión</h1>
       <form
         className="flex flex-col"

@@ -23,7 +23,13 @@ const UsuarioIndex = () => {
     }, [error]);
 
 //para ver la ruedita mientras carga la info de usuarios
-if (loading) return <div className="flex justify-center items-center w-full h-full"><ReactLoading type='spin'color='blue' height={'20%'} width={'20%'} /> </div>;
+if (loading){
+  return(
+    <div className="flex justify-center items-center w-full h-full">
+      <ReactLoading type='spin'color='rgb(67, 56, 202)' height={'20%'} width={'20%'} />
+    </div>
+  );
+} 
 
   return (
     <PrivateRoute roleList={["LIDER","ADMINISTRADOR",]}>

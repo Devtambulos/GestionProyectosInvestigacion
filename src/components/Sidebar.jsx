@@ -9,17 +9,11 @@ const SidebarLinks = () => {
       <Logo />
       <ul className="mt-12">
         <SidebarRoute to="/" title="Inicio" icon="fas fa-home" />
-        <SidebarRoute to="/avances" title="Avances" icon="fas fa-smile-wink" />
         <PrivateComponent roleList={["ADMINISTRADOR", "LIDER"]}>
           <SidebarRoute to="/usuarios" title="Usuarios" icon="fas fa-users" />
         </PrivateComponent>
-        <SidebarRoute
-          to="/proyectos"
-          title="Proyectos"
-          icon="fas fa-file-alt"
-        />
-        <SidebarRoute to="/category1" title="Catego 1" icon="fab fa-amazon" />
-        <SidebarRoute to="/category1/page1" title="Test" icon="fas fa-car" />
+        <SidebarRoute to="/proyectos" title="Proyectos" icon="fas fa-file-alt"/>
+
         <Logout text="Cerrar Sesión"/>
       </ul>
     </div>
@@ -190,12 +184,13 @@ const Logout = ({text}) => {
   };
   return (
     <li onClick={() => deleteToken()}>
-      <NavLink to="/auth/login" className="sidebar-route text-red-700">
+      <a href="/inicio" className="sidebar-route text-red-700">
         <div className="flex items-center">
           <i className="fas fa-sign-out-alt" />
+          
           <span className="text-sm  ml-2">{text}</span>
         </div>
-      </NavLink>
+      </a>
     </li>
   );
 };
