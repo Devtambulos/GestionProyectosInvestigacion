@@ -18,18 +18,18 @@ const PaginaInicial = () => {
 
 const Logo = () => {
   return (
-    <div className="p-3 w-full flex  items-center justify-center">
+    <div className="p-5 w-full flex flex-col items-center justify-center">
       <img src="DevProject_logo.png" alt="Logo" className="h-12" />
-      <span className="px-10 my-3 text-4xl font-bold text-center">DevProject</span>
+      {/* <span className="px-10 my-3 text-4xl font-bold text-center">DevProject</span> */}
     </div>
   );
 };
 
 const Redirigir = ({ irA, text }) => {
   return (
-    <button className={`mx-4 sm:mx-0 md:m-5 sm:px-3`}>
+    <button className={`mx-5 sm:mx-0 md:m-5 sm:px-3`}>
       <Link
-        className={`px-5 py-3 bg-indigo-900 rounded-md text-white hover:bg-indigo-700 hover:text-white font-semibold  `}
+        className={`px-3 py-2 bg-indigo-900 rounded-md text-white hover:bg-indigo-700 hover:text-white font-semibold  `}
         to={irA}
       >
         {text}
@@ -57,7 +57,7 @@ const Header = () => {
     <div className="bg-indigo-300 border-b border-solid border-black ">
       <header className="grid grid-cols-1 md:grid-cols-2">
         <div className="col-span-1 flex flex-wrap justify-center items-center p-5 md:row-span-1 ">
-          <h1 className="font-bold text-5xl p-1 w-full text-center ">
+          <h1 className="font-bold text-3xl p-1 w-full text-center md:text-5xl">
             DevProject es el lugar indicado donde podras gestionar tus proyectos
           </h1>
           <p className="text-2xl  textTitulo w-full text-center p-5">
@@ -66,9 +66,9 @@ const Header = () => {
 
           <Redirigir irA={"/auth/register"} text={"Empezar"} />
         </div>
-        <image className="md:col-span-1 p-5">
+        <figure className="flex justify-center items-center md:col-span-1 p-5">
           <img className="" src={imgHeader} alt="imgHeader" />
-        </image>
+        </figure>
       </header>
     </div>
   );
@@ -85,7 +85,7 @@ const Main = () => {
 
 const InfoEmpresa = () => {
   return (
-    <div className="flex flex-wrap justify-center py-8 items-center bg-gradient-to-b from-gray-100 to-gray-400">
+    <div className="flex flex-wrap justify-center py-8 items-center bg-gradient-to-b from-indigo-100 to-gray-400">
       <Section />
     </div>
   );
@@ -96,7 +96,7 @@ const Section = () => {
     <>
       {datosInfoEmpresa.map((section) => {
         return (
-          <section className=" grid grid-cols-1 md:grid-cols-2 py-2 p-6 m-4 justify-center items-center w-9/12 border-4 border-gray-500 border-double estilosSection">
+          <section className=" grid grid-cols-1 md:grid-cols-2 py-2 p-6 m-4 justify-center items-center w-9/12 border-4 border-gray-500 border-double estilosSection" key={section.titulo}>
             {section.textFirst ? (
               <>
                 <div>
@@ -105,15 +105,15 @@ const Section = () => {
                   </h2>
                   <p className="font-semibold text-xl">{section.parrafo}</p>
                 </div>
-                <image className="flex flex-wrap p-10 justify-center items-center  sm:p-24 md:p-20">
+                <figure className="flex flex-wrap p-10 justify-center items-center  sm:p-24 md:p-20">
                   <img src={section.img} alt={section.altImg} className="" />
-                </image>
+                </figure>
               </>
             ) : (
               <>
-                <image className="flex flex-wrap p-10 justify-center items-center sm:p-24 md:p-20">
+                <figure className="flex flex-wrap p-10 justify-center items-center sm:p-24 md:p-20">
                   <img src={section.img} alt={section.altImg} />
-                </image>
+                </figure>
                 <div>
                   <h2 className="text-center font-bold text-3xl uppercase">
                     {section.titulo}
@@ -138,9 +138,9 @@ const CardsDesarrolladores = () => {
             key={dev.id}
             className="flex flex-wrap flex-col w-40 min-w-min min-h-full p-4 m-6 items-center justify-center border border-solid border-white hover:bg-indigo-400 estilosHoverCardDevs"
           >
-            <image>
+            <figure>
               <img src={dev.img} alt="imgDev" />
-            </image>
+            </figure>
             <div className="flex flex-col flex-auto items-center justify-center">
               <p className="text-white text-center">{dev.campo1}</p>
               <p className="text-white text-center">{dev.campo2}</p>

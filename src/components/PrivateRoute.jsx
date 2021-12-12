@@ -1,4 +1,4 @@
-import React,{useLocation} from "react";
+import React, {useLocation} from "react";
 import { useUser } from "context/userContext";
 import { Link } from "react-router-dom";
 import { useAuth } from "context/authContext"
@@ -54,15 +54,16 @@ const Logout = () => {
   const deleteToken = () => {
     console.log('eliminar token');
     setToken(null);
+    window.location.reload(true)
   };
   return (
     <button onClick={() => deleteToken()}>
-      <a href='/inicio' className='sidebar-route text-red-700'>
+      <Link to="/inicio" className='sidebar-route text-red-700'>
         <div className='flex items-center'>
           <i className='fas fa-sign-out-alt' />
           <span className='text-sm  m-5'>Cerrar Sesión</span>
         </div>
-      </a>
+      </Link>
     </button>
   );
 };
