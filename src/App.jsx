@@ -3,8 +3,6 @@ import PrivateLayout from "layouts/PrivateLayout";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { UserContext } from "context/userContext";
 import Index from "pages/Index";
-import IndexCategory1 from "pages/category1/Index";
-import Category1 from "pages/category1/CategoryPage1";
 import "styles/globals.css";
 import UsuarioIndex from "pages/usuarios";
 import EditarUsuario from "pages/usuarios/editar";

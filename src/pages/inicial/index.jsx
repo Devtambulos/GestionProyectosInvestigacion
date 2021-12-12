@@ -18,18 +18,18 @@ const PaginaInicial = () => {
 
 const Logo = () => {
   return (
-    <div className="p-3 w-full flex flex-col items-center justify-center">
+    <div className="p-3 w-full flex  items-center justify-center">
       <img src="DevProject_logo.png" alt="Logo" className="h-12" />
-      <span className="my-2 text-xl font-bold text-center">DevProject</span>
+      <span className="px-10 my-3 text-4xl font-bold text-center">DevProject</span>
     </div>
   );
 };
 
 const Redirigir = ({ irA, text }) => {
   return (
-    <button className={`mx-5 sm:mx-0 md:m-5 sm:px-3`}>
+    <button className={`mx-4 sm:mx-0 md:m-5 sm:px-3`}>
       <Link
-        className={`px-3 py-2 bg-indigo-900 rounded-md text-white hover:bg-indigo-700 hover:text-white font-semibold  `}
+        className={`px-5 py-3 bg-indigo-900 rounded-md text-white hover:bg-indigo-700 hover:text-white font-semibold  `}
         to={irA}
       >
         {text}
@@ -44,7 +44,7 @@ const NavBar = () => {
       <div className="px-7 md:p-0">
         <Logo />
       </div>
-      <div className="px-7 py-3 md:p-0">
+      <div className="px-6 py-3 md:p-0">
         <Redirigir irA={"/auth/register"} text={"Registro"} />
         <Redirigir irA={"/auth/login"} text={"Login"} />
       </div>
