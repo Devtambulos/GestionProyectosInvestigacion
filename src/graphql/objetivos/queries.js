@@ -9,4 +9,17 @@ query FiltrarObjetivo($_id: String!) {
   }
 }`;
 
-export {GET_OBJETIVOS};
+const GET_OBJETIVO = gql`
+query Objetivo($_id: String!) {
+  objetivo(_id: $_id) {
+    _id
+    descripcion
+    tipo
+    proyecto {
+      _id
+    }
+  }
+}
+`; 
+
+export {GET_OBJETIVOS, GET_OBJETIVO};
