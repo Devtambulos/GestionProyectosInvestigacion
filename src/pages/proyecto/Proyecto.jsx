@@ -1,15 +1,17 @@
 import React, { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { GET_PROYECTO } from 'graphql/proyectos/queries';
-import { useQuery} from '@apollo/client';
+import { useQuery, useMutation} from '@apollo/client';
 import { toast } from 'react-toastify';
 import ReactLoading from 'react-loading';
 import { GET_OBJETIVOS } from "graphql/objetivos/queries";
 import {Enum_TipoObjetivo} from "../../utils/enums"
+import { ELIMINAR_OBJETIVO } from "graphql/objetivos/mutations";
+import { useState } from "react";
 
 const Proyecto = () => {
+  const [idObjetivoEliminar, SetIdObjetivoEliminar] = useState('');
   const {_id} = useParams();
-  console.log("sssssss",_id);
   // QUERY PROYECTO
   const {
      data: dataProyecto,
@@ -18,7 +20,7 @@ const Proyecto = () => {
     variables: { _id },
   });
 
-  console.log("Datos de un proyecto:", dataProyecto);
+  // console.log("Datos de un proyecto:", dataProyecto);
 
   // QUERY OBJETIVOS
 
@@ -26,23 +28,36 @@ const Proyecto = () => {
     data: dataObjetivos,
     error: errorObjetivos,
     loading: loadingObjetivos } = useQuery(GET_OBJETIVOS,{
-      variables: { _id} ,
+      variables: { _id} 
     });
 
- 
- console.log("Datos de Objetivos:", dataObjetivos);
+  // ELIMINAR OBJETIVO
+  const [eliminarObjetivo,{
+    data: dataEliminarObjetivo,
+    error: errorEliminarObjetivo,
+    loading: loadingEliminarObjetivo
+  }] = useMutation(ELIMINAR_OBJETIVO);
+
+//  console.log("Datos de Objetivos:", dataObjetivos);
+
+ useEffect(() => {
+  if (dataEliminarObjetivo) {
+    toast.success('Objetivo eliminado correctamente');
+  }
+}, [dataEliminarObjetivo]);
 
   useEffect(() => {
     if (errorProyecto) {
       toast.error('Error consultando los Proyectos');
     }
     if (errorObjetivos){
-      toast.error('Error consultando los Objetivos');
-
+      toast.error('Error consultando los Objetivos');}
+    if (errorEliminarObjetivo){
+      toast.error('Error eliminado objetivo');
     }
-  }, [errorProyecto, errorObjetivos]);
+  }, [errorProyecto, errorObjetivos, errorEliminarObjetivo]);
 
-  if (loadingProyecto || loadingObjetivos) return <div className="flex justify-center items-center w-full h-full"><ReactLoading type='spin'color='blue' height={'20%'} width={'20%'} /> </div>;
+  if (loadingProyecto || loadingObjetivos || loadingEliminarObjetivo) return <div className="flex justify-center items-center w-full h-full"><ReactLoading type='spin'color='blue' height={'20%'} width={'20%'} /> </div>;
   
   
   return (
@@ -51,12 +66,19 @@ const Proyecto = () => {
       <div className="flex justify-between p-0 my-0">
     {/* DATOS DEL PROYECTO */}
       PROYECTO ID: {dataProyecto.Proyecto._id}   
+      <div className="flex pl">
       <Link to={`/proyectos/editar/${dataProyecto.Proyecto._id}`} >
                         <i className='fas fa-pen text-green-400 hover:text-green-600 cursor-pointer
-                        p-1 hover:bg-green-100 rounded-full' />
+                        p-1 px-2 hover:bg-green-100 rounded-full' />
       </Link>
+      
+      <i className="fas fa-trash-alt text-red-400 hover:bg-red-100 rounded-full 
+      cursor-pointer hover:text-red-600 px-2 p-1"></i>
       </div>
-      LIDER: {dataProyecto.Proyecto.lider.nombre}
+      </div>
+      
+      
+      LIDER: {dataProyecto.Proyecto.lider?dataProyecto.Proyecto.lider.nombre:""}
       <br />
       PRESUPUESTO: {dataProyecto.Proyecto.presupuesto}
       <br />
@@ -79,7 +101,7 @@ const Proyecto = () => {
             <tr>
               <th>DESCRIPCION</th>
               <th>TIPO</th>
-              <th>EDITAR</th>
+              <th className="w-10">EDITAR</th>
             </tr>
           </thead>
           <tbody>
@@ -88,13 +110,22 @@ const Proyecto = () => {
       
                 return (
                   <tr key={u._id}>
-                    <td>{u.descripcion}</td>
-                    <td>{Enum_TipoObjetivo[u.tipo]}</td>
-                    <td>
-                      <Link to={`/proyectos/editar/objetivo${u._id}`}>
+                    <td className="text-center">
+                      {u.descripcion}</td>
+                    <td className="text-center">
+                      {Enum_TipoObjetivo[u.tipo]}</td>
+                    <td className="flex items-center justify-center">
+                      <Link 
+                      to={`/proyectos/editar/objetivo${u._id}`}>
                         <i className='fas fa-pen text-green-400 hover:text-green-600 cursor-pointer
-                        p-2 hover:bg-green-100 rounded-full' />
+                        p-1 px-2 hover:bg-green-100 rounded-full' />
                       </Link>
+                    
+                      <i 
+                      className="fas fa-trash-alt text-red-400 hover:bg-red-100 rounded-full 
+                      cursor-pointer hover:text-red-600 px-2 p-1"></i>
+                     
+
                     </td>
                   </tr>
                 );

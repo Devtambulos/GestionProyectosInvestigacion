@@ -19,7 +19,7 @@ const IndexProyecto = () => {
 
   useEffect(() => {
     if (error) {
-      toast.error("Error consultando los usuarios");
+      toast.error("Error consultando los proyectos");
     }
   }, [error]);
 
@@ -47,7 +47,7 @@ const IndexProyecto = () => {
               <Card
                 Key={proyecto._id}
                 nombre={proyecto.nombre}
-                lider={proyecto.lider.nombre}
+                lider={proyecto.lider?proyecto.lider.nombre:""}
                 estado={proyecto.estado}
                 fase={proyecto.fase}
               />

@@ -12,4 +12,12 @@ mutation EditarObjetivo(
   }
 `;
 
-export {EDITAR_OBJETIVO};
+const ELIMINAR_OBJETIVO = gql`
+mutation EliminarObjetivo($_id: String!) {
+    eliminarObjetivo(_id: $_id) {
+      _id
+    }
+  }
+`;
+
+export {EDITAR_OBJETIVO, ELIMINAR_OBJETIVO};
