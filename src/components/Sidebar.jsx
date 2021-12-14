@@ -9,8 +9,9 @@ const SidebarLinks = () => {
   return (
     <div className="sidebar">
       <Logo />
-      <ul className="mt-12">
+      <ul className="mt-12">       
         <SidebarRoute to="/" title="Inicio" icon="fas fa-home" />
+        <SidebarRoute to='/perfil' title='Perfil' icon='fas fa-user' />
         <PrivateComponent roleList={["ADMINISTRADOR", "LIDER"]}>
           <SidebarRoute to="/usuarios" title="Usuarios" icon="fas fa-users" />
         </PrivateComponent>
@@ -25,11 +26,18 @@ const SidebarLinks = () => {
 const SidebarLinksHide = () => {
   return (
     <ul className="mt-12">
+
       <SidebarRoute
         to="/"
         title="Inicio"
         posicion="justify-center"
         icon="fas fa-home"
+      />
+      <SidebarRoute
+        to="/perfil"
+        title="Perfil"
+        posicion="justify-center"
+        icon="fas fa-user"
       />
       <SidebarRoute
         to="/usuarios"
@@ -38,22 +46,10 @@ const SidebarLinksHide = () => {
         icon="fas fa-users"
       />
       <SidebarRoute
-        to="/page2"
-        title="Pagina2"
+        to="/proyectos"
+        title="Proyectos"
         posicion="justify-center"
-        icon="fas fa-smile-wink"
-      />
-      <SidebarRoute
-        to="/category1"
-        title="Catego 1"
-        posicion="justify-center"
-        icon="fab fa-amazon"
-      />
-      <SidebarRoute
-        to="/category1/page1"
-        title="Test"
-        posicion="justify-center"
-        icon="fas fa-car"
+        icon="fas fa-file-alt"
       />
       <Logout text=""/>
     </ul>
@@ -62,8 +58,9 @@ const SidebarLinksHide = () => {
 
 const SidebarLinksResponsive = () => {
   return (
-    <ul className="w-full items-center justify-center">
+    <ul className="w-full items-center justify-center">      
         <SidebarRoute to="/" title="Inicio" icon="fas fa-home" />
+        <SidebarRoute to='/perfil' title='Perfil' icon='fas fa-user' />
         <SidebarRoute to="/avances" title="Avances" icon="fas fa-smile-wink" />
         <PrivateComponent roleList={["ADMINISTRADOR", "LIDER"]}>
           <SidebarRoute to="/usuarios" title="Usuarios" icon="fas fa-users" />

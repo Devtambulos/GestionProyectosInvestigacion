@@ -29,7 +29,7 @@ const Redirigir = ({ irA, text }) => {
   return (
     <button className={`mx-5 sm:mx-0 md:m-5 sm:px-3`}>
       <Link
-        className={`px-3 py-2 bg-indigo-900 rounded-md text-white hover:bg-indigo-700 hover:text-white font-semibold  `}
+        className={`px-5 py-3 bg-indigo-900 rounded-md text-white hover:bg-indigo-700 hover:text-white font-semibold  `}
         to={irA}
       >
         {text}
@@ -44,7 +44,7 @@ const NavBar = () => {
       <div className="px-7 md:p-0">
         <Logo />
       </div>
-      <div className="px-6 py-3 md:p-0">
+      <div className="px-7 py-4 md:p-0">
         <Redirigir irA={"/auth/register"} text={"Registro"} />
         <Redirigir irA={"/auth/login"} text={"Login"} />
       </div>

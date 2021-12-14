@@ -6,6 +6,7 @@ import Index from "pages/Index";
 import "styles/globals.css";
 import UsuarioIndex from "pages/usuarios";
 import EditarUsuario from "pages/usuarios/editar";
+import Perfil from "pages/perfil";
 import "styles/globals.css";
 import "styles/tabla.css";
 import Registro from "pages/auth/registro";
@@ -93,6 +94,7 @@ function App() {
                 <Route path="" element={<Index />} />
                 <Route path="usuarios" element={<UsuarioIndex />} />
                 <Route path="/usuarios/editar/:_id" element={<EditarUsuario />} />
+                <Route path="/perfil" element={<Perfil />} />
                 <Route path="proyectos" element={<IndexProyecto/>} />
                 <Route path="/proyectos/:_id" element={<Proyecto />} />
                 <Route path="/proyectos/crear/" element={<ProyectoNuevo />} />
