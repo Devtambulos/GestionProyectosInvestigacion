@@ -34,7 +34,7 @@ const IndexProyecto = () => {
 
     
   return (
-    <PrivateRoute roleList={["LIDER", "ADMINISTRADOR"]}>
+    <PrivateRoute roleList={["LIDER", "ADMINISTRADOR", "ESTUDIANTE"]}>
       <div className="items-center font-serif text-gray-800">
         <NavBar titulo="Proyectos"/>
         <div className="p-8 px-8 py-8 sm:px-16 grid grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5">
