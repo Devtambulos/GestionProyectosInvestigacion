@@ -54,9 +54,6 @@ const Proyecto = () => {
     if (errorAvances) {
       toast.error('Error consultando los Avances');
     }
-    if (errorEliminarObjetivo) {
-      toast.error('Error eliminado objetivo');
-    }
   }, [errorProyecto, errorObjetivos, errorAvances]);
 
   if (loadingProyecto || loadingObjetivos || loadingAvances) return <div className="flex justify-center items-center w-full h-full"><ReactLoading type='spin' color='blue' height={'20%'} width={'20%'} /> </div>;
