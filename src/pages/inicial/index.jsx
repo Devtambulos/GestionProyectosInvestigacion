@@ -29,7 +29,7 @@ const Redirigir = ({ irA, text }) => {
   return (
     <button className={`mx-5 sm:mx-0 md:m-5 sm:px-3`}>
       <Link
-        className={`px-5 py-3 bg-indigo-900 rounded-md text-white hover:bg-indigo-700 hover:text-white font-semibold  `}
+        className={`px-5 py-3 bg-indigo-700 rounded-md text-white hover:bg-indigo-500 hover:text-white font-semibold  `}
         to={irA}
       >
         {text}

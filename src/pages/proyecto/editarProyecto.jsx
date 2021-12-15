@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 import DropDown from 'components/Dropdown';
 import { Enum_FaseProyecto } from 'utils/enums';
 import { Enum_EstadoProyecto } from 'utils/enums';
+import NavBar from 'components/Navbar';
 
 const EditarProyecto = () => {
   const { form, formData, updateFormData } = useFormData();
@@ -61,11 +62,12 @@ const EditarProyecto = () => {
     if (queryLoading) return <div>Cargando....</div>;
   
     return (
-      <div className='flew flex-col w-full h-full items-center justify-center p-10'>
+      <div className='w-full h-full items-center justify-center'>
+        <NavBar titulo="Editar Proyectos"/>
         <Link to={`/proyectos/${queryData.Proyecto._id}`}>
           <i className='fas fa-arrow-left text-gray-600 cursor-pointer font-bold text-xl hover:text-gray-900' />
         </Link>
-        <h1 className='m-4 text-3xl text-gray-800 font-bold text-center'>Editar Proyecto</h1>
+        <div className='flew flex-col w-full h-full items-center justify-center p-10'>
         <form
           onSubmit={submitForm}
           onChange={updateFormData}
@@ -122,6 +124,7 @@ const EditarProyecto = () => {
             text='Confirmar'
           />
         </form>
+      </div>
       </div>
     );
   };

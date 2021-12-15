@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import "styles/tabla.css";
 import PrivateRoute from "components/PrivateRoute";
 import ReactLoading from "react-loading";
@@ -9,6 +9,7 @@ import { GET_PROYECTOS } from "graphql/proyectos/queries";
 import Card from "../../components/Card";
 import { CardNew } from "../../components/Card";
 import PrivateComponent from "../../components/PrivateComponent";
+import NavBar from 'components/Navbar';
 
 const IndexProyecto = () => {
   const { data, error, loading } = useQuery(GET_PROYECTOS);
@@ -33,12 +34,10 @@ const IndexProyecto = () => {
 
     
   return (
-    <PrivateRoute roleList={["LIDER", "ADMINISTRADOR"]}>
-      <div className="p-8 items-center font-serif text-gray-800">
-        <div className="p-2 m-4 text-3xl font-serif text-gray-800 font-bold text-center w-full justify-center ">
-          Proyectos
-        </div>
-        <div className="px-8 py-8 sm:px-16 grid grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5">
+    <PrivateRoute roleList={["LIDER", "ADMINISTRADOR", "ESTUDIANTE"]}>
+      <div className="items-center font-serif text-gray-800">
+        <NavBar titulo="Proyectos"/>
+        <div className="p-8 px-8 py-8 sm:px-16 grid grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5">
           <PrivateComponent roleList={["ADMINISTRADOR", "LIDER"]}>
             <CardNew />
           </PrivateComponent>
