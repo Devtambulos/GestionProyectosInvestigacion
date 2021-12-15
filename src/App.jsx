@@ -13,10 +13,10 @@ import Registro from "pages/auth/registro";
 import AuthLayout from "layouts/AuthLayout";
 import Login from "pages/auth/login";
 import jwt_decode from "jwt-decode";
-import IndexProyecto from 'pages/proyecto/Index'
+import IndexProyecto from "pages/proyecto/Index";
 import Proyecto from "pages/proyecto/Proyecto";
 import ProyectoNuevo from "pages/proyecto/ProyectoNuevo";
-import PaginaInicial from "pages/inicial/index"
+import PaginaInicial from "pages/inicial/index";
 import {
   ApolloProvider,
   ApolloClient,
@@ -29,7 +29,8 @@ import EditarProyecto from "./pages/proyecto/editarProyecto";
 import EditarObjetivos from "pages/objetivo/EditarObjetivo";
 
 const httpLink = createHttpLink({
-  uri: "http://localhost:4000/graphql",
+  /* uri: "http://localhost:4000/graphql", */
+  uri: "https://gestion-proyectos-dev.herokuapp.com/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -51,21 +52,21 @@ const client = new ApolloClient({
 
 function App() {
   const [userData, setUserData] = useState({});
-  const [authToken, setAuthToken] = useState('')
+  const [authToken, setAuthToken] = useState("");
 
   const setToken = (token) => {
-    setAuthToken(token)
-    if(token){
-      localStorage.setItem('token', JSON.stringify(token))
-    }else{
-      localStorage.removeItem('token')
+    setAuthToken(token);
+    if (token) {
+      localStorage.setItem("token", JSON.stringify(token));
+    } else {
+      localStorage.removeItem("token");
     }
-  }
-  
-  useEffect(()=>{
-    if(authToken){
+  };
+
+  useEffect(() => {
+    if (authToken) {
       /* console.log('Token: ',authToken) */
-      const decoded = jwt_decode(authToken)
+      const decoded = jwt_decode(authToken);
       /*   */
       setUserData({
         _id: decoded._id,
@@ -74,38 +75,42 @@ function App() {
         identificacion: decoded.identificacion,
         correo: decoded.correo,
         rol: decoded.rol,
-        estado: decoded.estado
-      })
+        estado: decoded.estado,
+      });
     }
-    
-  },[authToken])
-
-  
-
-
+  }, [authToken]);
 
   return (
     <ApolloProvider client={client}>
-      <AuthContext.Provider value={{authToken, setAuthToken, setToken}}>
+      <AuthContext.Provider value={{ authToken, setAuthToken, setToken }}>
         <UserContext.Provider value={{ userData, setUserData }}>
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<PrivateLayout />}>
                 <Route path="" element={<Index />} />
                 <Route path="usuarios" element={<UsuarioIndex />} />
-                <Route path="/usuarios/editar/:_id" element={<EditarUsuario />} />
+                <Route
+                  path="/usuarios/editar/:_id"
+                  element={<EditarUsuario />}
+                />
                 <Route path="/perfil" element={<Perfil />} />
-                <Route path="proyectos" element={<IndexProyecto/>} />
+                <Route path="proyectos" element={<IndexProyecto />} />
                 <Route path="/proyectos/:_id" element={<Proyecto />} />
                 <Route path="/proyectos/crear/" element={<ProyectoNuevo />} />
-                <Route path="/proyectos/editar/:_id" element={<EditarProyecto/>} />
-                <Route path="/proyectos/editar/objetivo:_id" element={<EditarObjetivos/>} />
+                <Route
+                  path="/proyectos/editar/:_id"
+                  element={<EditarProyecto />}
+                />
+                <Route
+                  path="/proyectos/editar/objetivo:_id"
+                  element={<EditarObjetivos />}
+                />
               </Route>
               <Route path="/auth" element={<AuthLayout />}>
                 <Route path="register" element={<Registro />} />
                 <Route path="login" element={<Login />} />
               </Route>
-              <Route path="/inicio" element={<PaginaInicial />}  />
+              <Route path="/inicio" element={<PaginaInicial />} />
             </Routes>
           </BrowserRouter>
         </UserContext.Provider>
