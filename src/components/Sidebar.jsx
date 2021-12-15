@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 
 
 const SidebarLinks = () => {
+
+
   return (
     <div className="sidebar">
       <Logo />
@@ -81,7 +83,7 @@ const Logo = () => {
   return (
     <div className="py-3 w-full flex flex-col items-center justify-center">
       <img src="DevProject_logo.png" alt="Logo" className="h-16" />
-      <span className="my-2 text-xl font-bold text-center">DevProject</span>
+      <span className="my-2 text-xl font-bold text-center">DevProject   </span>
     </div>
   );
 };

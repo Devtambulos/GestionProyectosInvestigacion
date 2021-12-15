@@ -10,6 +10,7 @@ import { Enum_TipoObjetivo } from "../../utils/enums"
 import { ELIMINAR_OBJETIVO } from "graphql/objetivos/mutations";
 import { useState } from "react";
 
+
 const Proyecto = () => {
   const [idObjetivoEliminar, SetIdObjetivoEliminar] = useState('');
   const { _id } = useParams();
@@ -75,91 +76,45 @@ const Proyecto = () => {
 
 
   return (
-    <div className='flew flex-col w-full h-full items-center justify-center p-10'>
-      <h1 className='m-4 text-3xl text-gray-800 font-bold text-center'>Proyecto {dataProyecto.Proyecto.nombre}</h1>
-      <div className="flex justify-between p-0 my-0">
-        {/* DATOS DEL PROYECTO */}
-        PROYECTO ID: {dataProyecto.Proyecto._id}
-        <div className="flex pl">
-          <Link to={`/proyectos/editar/${dataProyecto.Proyecto._id}`} >
-            <i className='fas fa-pen text-green-400 hover:text-green-600 cursor-pointer
-                        p-1 px-2 hover:bg-green-100 rounded-full' />
-          </Link>
-
-          <i className="fas fa-trash-alt text-red-400 hover:bg-red-100 rounded-full 
-      cursor-pointer hover:text-red-600 px-2 p-1"></i>
-        </div>
-      </div>
-
-
-      LIDER: {dataProyecto.Proyecto.lider ? dataProyecto.Proyecto.lider.nombre : ""}
-      <br />
-      PRESUPUESTO: {dataProyecto.Proyecto.presupuesto}
-      <br />
-      INICIO: {dataProyecto.Proyecto.fechaInicio}
-      <br />
-      FIN: {dataProyecto.Proyecto.fechaFin}
-      <br />
-      FASE: {dataProyecto.Proyecto.fase}
-      <br />
-      ESTADO: {dataProyecto.Proyecto.estado}
-      {/* OBJETIVOS DEL PROYECTO*/}
-      <div>
-        {/* <PrivateRoute roleList={["LIDER","ADMINISTRADOR",]}> */}
-        <div className="p-8 items-center font-serif text-gray-800">
-          <div className="p-2 m-4 text-3xl font-serif text-gray-800 font-bold text-center w-full justify-center ">
-            Objetivos
-          </div>
-          <table className='tabla '>
-            <thead>
-              <tr>
-                <th>DESCRIPCION</th>
-                <th>TIPO</th>
-                <th className="w-10">EDITAR</th>
-              </tr>
-            </thead>
-            <tbody>
-              {dataObjetivos &&
-                dataObjetivos.filtrarObjetivo.map((u) => {
-
-                  return (
-                    <tr key={u._id}>
-                      <td className="text-center">
-                        {u.descripcion}</td>
-                      <td className="text-center">
-                        {Enum_TipoObjetivo[u.tipo]}</td>
-                      <td className="flex items-center justify-center">
-                        <Link
-                          to={`/proyectos/editar/objetivo${u._id}`}>
-                          <i className='fas fa-pen text-green-400 hover:text-green-600 cursor-pointer
-                        p-1 px-2 hover:bg-green-100 rounded-full' />
-                        </Link>
-
-                        <i
-                          className="fas fa-trash-alt text-red-400 hover:bg-red-100 rounded-full 
-                      cursor-pointer hover:text-red-600 px-2 p-1"></i>
-
-
-                      </td>
-                    </tr>
-                  );
-                })}
-            </tbody>
-          </table>
-        </div>
-        {/* </PrivateRoute> */}
-      </div>
-      {/* AVANCES DEL PROYECTO */}
-      <div className="p-10 flex flex-col">
-        <div className='p-2 m-4 text-3xl font-serif text-gray-800 font-bold text-center flex flex-col w-full'>
-          Avances
-          <div className="my-2 self-end">
-            <Link to={`/proyectos/${dataProyecto.Proyecto._id}/avance`}>
-              <i className='fas fa-plus-circle text-purple-700 hover:text-green-600 cursor-pointer
-                        p-1 px-2 hover:bg-green-100 rounded-full' />
+    <div className='flew items-center justify-center '>
+        <div className="shadow-md h-16 flex items-center mb-2 rounded-b-3xl p-3 bg-gradient-to-b from-gray-300  text-3xl font-serif  text-gray-800 font-bold text-center w-full justify-center ">
+         Proyecto {dataProyecto.Proyecto.nombre}
+        </div> 
+        <div className='flew flex-col w-full h-full items-center justify-center px-10 my-10 '>
+          <div className="flex justify-between">
+            {/* DATOS DEL PROYECTO */}
+              PROYECTO ID: {dataProyecto.Proyecto._id}   
+            <div className="flex pl">
+            <Link to={`/proyectos/editar/${dataProyecto.Proyecto._id}`} >
+              <i className='fas fa-pen text-green-400 hover:text-green-600 cursor-pointer p-1 px-2 hover:bg-green-100 rounded-full' />
             </Link>
-          </div>
+            <i className="fas fa-trash-alt text-red-400 hover:bg-red-100 rounded-full 
+            cursor-pointer hover:text-red-600 px-2 p-1"></i>
+            </div>
+          </div>     
+          LIDER: {dataProyecto.Proyecto.lider?dataProyecto.Proyecto.lider.nombre:""}
+          <br />
+          PRESUPUESTO: {dataProyecto.Proyecto.presupuesto}
+          <br />
+          INICIO: {dataProyecto.Proyecto.fechaInicio}
+          <br />
+          FIN: {dataProyecto.Proyecto.fechaFin}
+          <br />
+          FASE: {dataProyecto.Proyecto.fase}
+          <br />
+          ESTADO: {dataProyecto.Proyecto.estado }
+    </div>
+    {/* OBJETIVOS DEL PROYECTO*/}
+    <div>
+    {/* <PrivateRoute roleList={["LIDER","ADMINISTRADOR",]}> */}
+        <div className=" my-10 shadow-md h-14 flex items-center mb-2 p-3 bg-gradient-to-b from-gray-300  text-2xl font-serif  text-gray-800 font-bold text-center w-full justify-center ">
+        Objetivos
         </div>
+      <div className="p-8 items-center font-serif text-gray-800">
+        <div className="p-2 m-4 text-3xl font-serif text-gray-800 font-bold text-center w-full justify-center ">
+          Objetivos
+        </div>
+                 
         <table className='tabla '>
           <thead>
             <tr>
@@ -201,12 +156,16 @@ const Proyecto = () => {
           </tbody>
         </table>
       </div>
-      {/* INSCRIOCIONES DEL PROYECTO */}
-      <div>
-        <h1 className='p-2 m-4 text-3xl font-serif text-gray-800 font-bold text-center w-full justify-center'>
-          Inscripciones
-        </h1>
+    {/* </PrivateRoute> */}
+    </div>
+    {/* AVANCES DEL PROYECTO */}
+    <div className=" my-10 shadow-md h-14 flex items-center mb-2 p-3 bg-gradient-to-b from-gray-300  text-2xl font-serif  text-gray-800 font-bold text-center w-full justify-center ">
+      Avances
       </div>
+    {/* INSCRIOCIONES DEL PROYECTO */}
+    <div className=" my-10 shadow-md h-14 flex items-center mb-2 p-3 bg-gradient-to-b from-gray-300  text-2xl font-serif  text-gray-800 font-bold text-center w-full justify-center ">
+        Inscripciones
+    </div>
 
     </div>
 
