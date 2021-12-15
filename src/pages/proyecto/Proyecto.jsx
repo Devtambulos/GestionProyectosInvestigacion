@@ -6,11 +6,8 @@ import { toast } from 'react-toastify';
 import ReactLoading from 'react-loading';
 import { GET_OBJETIVOS } from "graphql/objetivos/queries";
 import {Enum_TipoObjetivo} from "../../utils/enums"
-import { ELIMINAR_OBJETIVO } from "graphql/objetivos/mutations";
-import { useState } from "react";
 
 const Proyecto = () => {
-  const [idObjetivoEliminar, SetIdObjetivoEliminar] = useState('');
   const {_id} = useParams();
   // QUERY PROYECTO
   const {
@@ -31,20 +28,8 @@ const Proyecto = () => {
       variables: { _id} 
     });
 
-  // ELIMINAR OBJETIVO
-  const [eliminarObjetivo,{
-    data: dataEliminarObjetivo,
-    error: errorEliminarObjetivo,
-    loading: loadingEliminarObjetivo
-  }] = useMutation(ELIMINAR_OBJETIVO);
-
 //  console.log("Datos de Objetivos:", dataObjetivos);
 
- useEffect(() => {
-  if (dataEliminarObjetivo) {
-    toast.success('Objetivo eliminado correctamente');
-  }
-}, [dataEliminarObjetivo]);
 
   useEffect(() => {
     if (errorProyecto) {
@@ -52,10 +37,8 @@ const Proyecto = () => {
     }
     if (errorObjetivos){
       toast.error('Error consultando los Objetivos');}
-    if (errorEliminarObjetivo){
-      toast.error('Error eliminado objetivo');
-    }
-  }, [errorProyecto, errorObjetivos, errorEliminarObjetivo]);
+    
+  }, [errorProyecto, errorObjetivos,]);
 
   if (loadingProyecto || loadingObjetivos ) return <div className="flex justify-center items-center w-full h-full"><ReactLoading type='spin'color='blue' height={'20%'} width={'20%'} /> </div>;
   
@@ -65,7 +48,7 @@ const Proyecto = () => {
       <h1 className='m-4 text-3xl text-gray-800 font-bold text-center'>Proyecto {dataProyecto.Proyecto.nombre}</h1>
       <div className="flex justify-between p-0 my-0">
     {/* DATOS DEL PROYECTO */}
-      PROYECTO ID: {dataProyecto.Proyecto._id}   
+      PROYECTO ID: {dataProyecto.Proyecto._id}   s
       <div className="flex pl">
       <Link to={`/proyectos/editar/${dataProyecto.Proyecto._id}`} >
                         <i className='fas fa-pen text-green-400 hover:text-green-600 cursor-pointer
@@ -122,7 +105,6 @@ const Proyecto = () => {
                       </Link>
                     
                       <i
-                      loading = {loadingEliminarObjetivo} 
                       className="fas fa-trash-alt text-red-400 hover:bg-red-100 rounded-full 
                       cursor-pointer hover:text-red-600 px-2 p-1"></i>
                      
