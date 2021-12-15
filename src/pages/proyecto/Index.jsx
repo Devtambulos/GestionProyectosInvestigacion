@@ -33,7 +33,7 @@ const IndexProyecto = () => {
 
     
   return (
-    <PrivateRoute roleList={["LIDER", "ADMINISTRADOR"]}>
+    <PrivateRoute roleList={["LIDER", "ADMINISTRADOR", "ESTUDIANTE"]}>
       <div className="p-8 items-center font-serif text-gray-800">
         <div className="p-2 m-4 text-3xl font-serif text-gray-800 font-bold text-center w-full justify-center ">
           Proyectos

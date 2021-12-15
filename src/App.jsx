@@ -28,6 +28,7 @@ import { AuthContext } from "context/authContext";
 import EditarProyecto from "./pages/proyecto/editarProyecto";
 import EditarObjetivos from "pages/objetivo/EditarObjetivo";
 import EditarAvance from "pages/avances/editarAvance";
+import CrearAvance from "pages/avances/crearAvance";
 
 const httpLink = createHttpLink({
   uri: "http://localhost:4000/graphql",
@@ -98,6 +99,7 @@ function App() {
                 <Route path="/perfil" element={<Perfil />} />
                 <Route path="proyectos" element={<IndexProyecto/>} />
                 <Route path="/proyectos/:_id" element={<Proyecto />} />
+                <Route path="/proyectos/:_id/avance" element={<CrearAvance />}/>
                 <Route path="/proyectos/crear/" element={<ProyectoNuevo />} />
                 <Route path="/proyectos/editar/:_id" element={<EditarProyecto/>} />
                 <Route path="/proyectos/editar/objetivo:_id" element={<EditarObjetivos/>} />

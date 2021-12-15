@@ -150,9 +150,15 @@ const Proyecto = () => {
         {/* </PrivateRoute> */}
       </div>
       {/* AVANCES DEL PROYECTO */}
-      <div>
-        <div className='p-2 m-4 text-3xl font-serif text-gray-800 font-bold text-center w-full justify-center'>
+      <div className="p-10 flex flex-col">
+        <div className='p-2 m-4 text-3xl font-serif text-gray-800 font-bold text-center flex flex-col w-full'>
           Avances
+          <div className="my-2 self-end">
+            <Link to={`/proyectos/${dataProyecto.Proyecto._id}/avance`}>
+              <i className='fas fa-plus-circle text-purple-700 hover:text-green-600 cursor-pointer
+                        p-1 px-2 hover:bg-green-100 rounded-full' />
+            </Link>
+          </div>
         </div>
         <table className='tabla '>
           <thead>
