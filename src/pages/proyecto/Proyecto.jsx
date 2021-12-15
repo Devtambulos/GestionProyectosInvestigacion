@@ -57,7 +57,7 @@ const Proyecto = () => {
     }
   }, [errorProyecto, errorObjetivos, errorEliminarObjetivo]);
 
-  if (loadingProyecto || loadingObjetivos || loadingEliminarObjetivo) return <div className="flex justify-center items-center w-full h-full"><ReactLoading type='spin'color='blue' height={'20%'} width={'20%'} /> </div>;
+  if (loadingProyecto || loadingObjetivos ) return <div className="flex justify-center items-center w-full h-full"><ReactLoading type='spin'color='blue' height={'20%'} width={'20%'} /> </div>;
   
   
   return (
@@ -121,7 +121,8 @@ const Proyecto = () => {
                         p-1 px-2 hover:bg-green-100 rounded-full' />
                       </Link>
                     
-                      <i 
+                      <i
+                      loading = {loadingEliminarObjetivo} 
                       className="fas fa-trash-alt text-red-400 hover:bg-red-100 rounded-full 
                       cursor-pointer hover:text-red-600 px-2 p-1"></i>
                      
