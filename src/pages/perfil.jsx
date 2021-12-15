@@ -15,7 +15,7 @@ const Perfil = () => {
   const [editFoto, setEditFoto] = useState(false);
   const { form, formData, updateFormData } = useFormData(null);
   const { userData, setUserData } = useUser();
-  const { _id } = useParams();
+  
 
   const {
     data: queryData,
@@ -28,6 +28,7 @@ const Perfil = () => {
   });
   
   console.log("queryData perfil", queryData);
+  console.log("formData perfil", formData);
 
   const [editarPerfil, { 
     data: dataMutation, 
@@ -35,6 +36,8 @@ const Perfil = () => {
     loading: loadingMutation }] =
     useMutation(EDITAR_PERFIL);
 
+  console.log("data perfil", editarPerfil.data);
+  console.log("dataMutation perfil", dataMutation);
 
 
   useEffect(() => {
@@ -43,17 +46,13 @@ const Perfil = () => {
       setUserData({ ...userData, foto: dataMutation.editarPerfil.foto });
       toast.success('Perfil modificado correctamente');
       refetch();
-      console.log("Data M", dataMutation);
-      console.log("Data ID", dataMutation._id);
-      console.log("userData", userData);
-      console.log("formData", formData);
     }
   }, [dataMutation]);
   console.log("dataMutation perfil", dataMutation);
 
   const submitForm = async (e) => {
     e.preventDefault();
-    console.log('fd perfil',_id, formData);
+    //console.log('fd perfil',_id, formData);
     const formUploaded = await uploadFormData(formData);
     editarPerfil({
       variables: {
