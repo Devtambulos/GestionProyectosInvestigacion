@@ -23,7 +23,6 @@ const EditarUsuario = () => {
     variables: { _id },
   });
 
-  console.log(queryData);
 
   const [editarUsuario, {
     data: mutationData,
@@ -33,7 +32,6 @@ const EditarUsuario = () => {
 
   const submitForm = (e) => {
     e.preventDefault();
-    console.log('fd',_id, formData);
     delete formData.rol;
     editarUsuario({
       variables: { _id, ...formData },
