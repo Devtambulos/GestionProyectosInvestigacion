@@ -1,23 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { GET_PROYECTO } from 'graphql/proyectos/queries';
-import { useQuery, useMutation } from '@apollo/client';
+import { useQuery} from '@apollo/client';
 import { toast } from 'react-toastify';
 import ReactLoading from 'react-loading';
 import { GET_OBJETIVOS } from "graphql/objetivos/queries";
 import { GET_AVANCES } from "graphql/avances/queries";
 import { Enum_TipoObjetivo } from "../../utils/enums"
-import { ELIMINAR_OBJETIVO } from "graphql/objetivos/mutations";
-import { useState } from "react";
 
 const Proyecto = () => {
-  const [idObjetivoEliminar, SetIdObjetivoEliminar] = useState('');
   const { _id } = useParams();
   // QUERY PROYECTO
   const {
     data: dataProyecto,
     error: errorProyecto,
-    loading: loadingProyecto } = useQuery(GET_PROYECTO, {
+    loading: loadingProyecto,
+  } = useQuery(GET_PROYECTO, {
       variables: { _id },
     });
 
@@ -28,8 +26,10 @@ const Proyecto = () => {
   const {
     data: dataObjetivos,
     error: errorObjetivos,
-    loading: loadingObjetivos } = useQuery(GET_OBJETIVOS, {
-      variables: { _id }
+    loading: loadingObjetivos,
+    refetch: refetchObjetivos } = useQuery(GET_OBJETIVOS, {
+      variables: { _id },
+      // pollInterval: 50000,
     });
 
   // QUERY AVANCES
@@ -42,7 +42,6 @@ const Proyecto = () => {
     });
 
 //  console.log("Datos de Objetivos:", dataObjetivos);
-
 
   useEffect(() => {
     if (errorProyecto) {
@@ -92,8 +91,13 @@ const Proyecto = () => {
       <div>
         {/* <PrivateRoute roleList={["LIDER","ADMINISTRADOR",]}> */}
         <div className="p-8 items-center font-serif text-gray-800">
-          <div className="p-2 m-4 text-3xl font-serif text-gray-800 font-bold text-center w-full justify-center ">
-            Objetivos
+        <div className='p-2 m-4 text-3xl font-serif text-gray-800 font-bold text-center flex flex-col w-full'>            Objetivos
+            <div className="my-2 self-end">
+            <Link to={`/proyectos/${dataProyecto.Proyecto._id}/objetivo`}>
+              <i className='fas fa-plus-circle text-purple-700 hover:text-green-600 cursor-pointer
+                        p-1 px-2 hover:bg-green-100 rounded-full' />
+            </Link>
+          </div>
           </div>
           <table className='tabla '>
             <thead>
@@ -123,8 +127,6 @@ const Proyecto = () => {
                         <i
                           className="fas fa-trash-alt text-red-400 hover:bg-red-100 rounded-full 
                       cursor-pointer hover:text-red-600 px-2 p-1"></i>
-
-
                       </td>
                     </tr>
                   );
