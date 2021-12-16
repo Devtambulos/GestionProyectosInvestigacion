@@ -127,7 +127,7 @@ const Perfil = () => {
           <ButtonLoading
           text='Confirmar'
           loading={loadingMutation}
-          disabled={false}
+          disabled={Object.keys(formData).length === 0}
           />
         </div>
        </form>
