@@ -12,10 +12,6 @@ const UsuarioIndex = () => {
   const { data, error, loading } = useQuery(GET_USUARIOS);
 
   useEffect(() => {
-    console.log('data servidor', data);
-  }, [data]);
-
-  useEffect(() => {
       if (error) {
         toast.error('Error consultando los usuarios');
       }
