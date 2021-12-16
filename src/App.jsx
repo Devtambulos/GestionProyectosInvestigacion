@@ -29,6 +29,7 @@ import EditarProyecto from "./pages/proyecto/editarProyecto";
 import EditarObjetivos from "pages/objetivo/EditarObjetivo";
 import EditarAvance from "pages/avances/editarAvance";
 import CrearAvance from "pages/avances/crearAvance";
+import IndexAvances from "pages/avances/Index";
 
 const httpLink = createHttpLink({
   uri: "http://localhost:4000/graphql",
@@ -99,6 +100,7 @@ function App() {
                 <Route path="/usuarios/editar/:_id" element={<EditarUsuario />} />
                 <Route path="/perfil" element={<Perfil />} />
                 <Route path="proyectos" element={<IndexProyecto/>} />
+                <Route path="avances" element={<IndexAvances/>} />
                 <Route path="/proyectos/:_id" element={<Proyecto />} />
                 <Route path="/proyectos/:_id/avance" element={<CrearAvance />}/>
                 <Route path="/proyectos/crear/" element={<ProyectoNuevo />} />
