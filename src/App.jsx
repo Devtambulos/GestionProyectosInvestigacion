@@ -100,7 +100,6 @@ function App() {
                 <Route path="/usuarios/editar/:_id" element={<EditarUsuario />} />
                 <Route path="/perfil" element={<Perfil />} />
                 <Route path="proyectos" element={<IndexProyecto/>} />
-                <Route path="avances" element={<IndexAvances/>} />
                 <Route path="/proyectos/:_id" element={<Proyecto />} />
                 <Route path="/proyectos/:_id/avance" element={<CrearAvance />}/>
                 <Route path="/proyectos/:_id/objetivo" element={<CrearObjetivo/>}/>

@@ -175,13 +175,9 @@ const Proyecto = () => {
                         <i className='fas fa-pen text-green-400 hover:text-green-600 cursor-pointer
                         p-1 px-2 hover:bg-green-100 rounded-full' />
                       </Link>
-<<<<<<< HEAD
-                      <i className="fas fa-trash-alt text-red-400 hover:bg-red-100 rounded-full 
-=======
                     
                       <i
                       className="fas fa-trash-alt text-red-400 hover:bg-red-100 rounded-full 
->>>>>>> eb39304b5d1732fa590812789f239882baff321c
                       cursor-pointer hover:text-red-600 px-2 p-1"></i>
                     </td>
                   </tr>
