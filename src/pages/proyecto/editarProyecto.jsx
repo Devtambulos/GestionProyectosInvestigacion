@@ -24,7 +24,7 @@ const EditarProyecto = () => {
     variables: { _id },
   });
 
-  console.log(queryData);
+  console.log("query",queryData);
   
   const [editarProyecto, {
     data: mutationData,
@@ -59,7 +59,7 @@ const EditarProyecto = () => {
       }
     }, [queryError, mutationError]);
   
-    if (queryLoading) return <div>Cargando....</div>;
+    if (queryLoading, queryLoading) return <div>Cargando....</div>;
   
     return (
       <div className='w-full h-full items-center justify-center'>
