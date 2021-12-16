@@ -15,10 +15,10 @@ const Perfil = () => {
   const [editFoto, setEditFoto] = useState(false);
   const { form, formData, updateFormData } = useFormData(null);
   const { userData, setUserData } = useUser();
-  const { _id } = useParams();
-
+  
   const {
     data: queryData,
+    error: queryError,
     loading: queryLoading,
     refetch,
   } = useQuery(GET_USUARIO, {
@@ -26,8 +26,6 @@ const Perfil = () => {
       _id: userData._id,
     },
   });
-  
-  console.log("queryData perfil", queryData);
 
   const [editarPerfil, { 
     data: dataMutation, 
@@ -35,25 +33,29 @@ const Perfil = () => {
     loading: loadingMutation }] =
     useMutation(EDITAR_PERFIL);
 
-
-
-  useEffect(() => {
-    
+  useEffect(() => {    
     if (dataMutation) {  
       setUserData({ ...userData, foto: dataMutation.editarPerfil.foto });
       toast.success('Perfil modificado correctamente');
       refetch();
-      console.log("Data M", dataMutation);
-      console.log("Data ID", dataMutation._id);
-      console.log("userData", userData);
-      console.log("formData", formData);
     }
   }, [dataMutation]);
-  console.log("dataMutation perfil", dataMutation);
+
+  useEffect(() => {
+    if (errorMutation) {
+      toast.error('Error modificando el perfil');
+    }
+
+    if (queryError) {
+      toast.error('Error consultando el perfil');
+    }
+  }, [queryError, errorMutation]);
+
+
 
   const submitForm = async (e) => {
     e.preventDefault();
-    console.log('fd perfil',_id, formData);
+    //console.log('fd perfil',_id, formData);
     const formUploaded = await uploadFormData(formData);
     editarPerfil({
       variables: {
@@ -69,7 +71,7 @@ const Perfil = () => {
   return (
     <div className='items-center justify-center w-full'>
       <NavBar titulo="Perfil del usuario"/>
-      <div className='p-10 flex flex-col items-center justify-center w-full'>
+      <div className='py-10 p-10 flex flex-col items-center justify-center w-full'>
       <form ref={form} 
       onChange={updateFormData} 
       onSubmit={submitForm}>
@@ -104,29 +106,30 @@ const Perfil = () => {
             <button
               type='button'
               onClick={() => setEditFoto(true)}
-              className='bg-indigo-300 p-1 my-2 rounded-md text-white'
+              className='bg-green-500 hover:bg-green-400 p-2 my-2 rounded-md text-white'
             >
               Cambiar imagen
             </button>
           </div>
         ) : (
-          <div>
+          <div className='flex flex-col items-center'>
             <Input label='Foto' name='foto' type='file' required />
             <button
               type='button'
               onClick={() => setEditFoto(false)}
-              className='bg-indigo-300 p-1 my-2 rounded-md text-white'
+              className='bg-red-500 hover:bg-red-400 py-2 px-4 my-2 rounded-md text-white'
             >
               Cancelar
             </button>
           </div>
         )}
+        <div className='flex flex-col items-center'>
           <ButtonLoading
           text='Confirmar'
           loading={loadingMutation}
-          disabled={false}
-        />
-          
+          disabled={Object.keys(formData).length === 0}
+          />
+        </div>
        </form>
      </div>
   </div>
