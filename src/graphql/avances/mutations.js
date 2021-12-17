@@ -17,8 +17,8 @@ mutation crearAvance(
 `;
 
 const EDITAR_AVANCE = gql`
-mutation EditarAvance($_id: String!, $descripcion: String) {
-  editarAvance(_id: $_id, descripcion: $descripcion) {
+mutation EditarAvance($_id: String!, $descripcion: String, $observaciones: String) {
+  editarAvance(_id: $_id, descripcion: $descripcion, observaciones: $observaciones) {
     _id
     fecha
     descripcion

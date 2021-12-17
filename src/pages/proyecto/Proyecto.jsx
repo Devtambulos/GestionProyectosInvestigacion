@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { GET_PROYECTO } from 'graphql/proyectos/queries';
-import { useQuery} from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { toast } from 'react-toastify';
 import ReactLoading from 'react-loading';
 import { GET_OBJETIVOS } from "graphql/objetivos/queries";
 import { GET_AVANCES } from "graphql/avances/queries";
 import { Enum_TipoObjetivo } from "../../utils/enums"
+import PrivateComponent from "components/PrivateComponent";
 
 const Proyecto = () => {
   const { _id } = useParams();
@@ -16,8 +17,8 @@ const Proyecto = () => {
     error: errorProyecto,
     loading: loadingProyecto,
   } = useQuery(GET_PROYECTO, {
-      variables: { _id },
-    });
+    variables: { _id },
+  });
 
   // console.log("Datos de un proyecto:", dataProyecto);
 
@@ -41,7 +42,7 @@ const Proyecto = () => {
       variables: { _id }
     });
 
-//  console.log("Datos de Objetivos:", dataObjetivos);
+  //  console.log("Datos de Objetivos:", dataObjetivos);
 
   useEffect(() => {
     if (errorProyecto) {
@@ -64,14 +65,14 @@ const Proyecto = () => {
       <Link
         className='m-2 p-2'
         to={`/proyectos`}>
-          <i className='fas fa-arrow-left text-gray-600 cursor-pointer font-bold text-xl hover:text-gray-900' />
-        </Link>
+        <i className='fas fa-arrow-left text-gray-600 cursor-pointer font-bold text-xl hover:text-gray-900' />
+      </Link>
       <div className="flex justify-between p-0 my-0">
-    {/* DATOS DEL PROYECTO */}
-      PROYECTO ID: {dataProyecto.Proyecto._id}   
-      <div className="flex pl">
-      <Link to={`/proyectos/editar/${dataProyecto.Proyecto._id}`} >
-                        <i className='fas fa-pen text-green-400 hover:text-green-600 cursor-pointer
+        {/* DATOS DEL PROYECTO */}
+        PROYECTO ID: {dataProyecto.Proyecto._id}
+        <div className="flex pl">
+          <Link to={`/proyectos/editar/${dataProyecto.Proyecto._id}`} >
+            <i className='fas fa-pen text-green-400 hover:text-green-600 cursor-pointer
                         p-1 px-2 hover:bg-green-100 rounded-full' />
           </Link>
 
@@ -96,13 +97,13 @@ const Proyecto = () => {
       <div>
         {/* <PrivateRoute roleList={["LIDER","ADMINISTRADOR",]}> */}
         <div className="p-8 items-center font-serif text-gray-800">
-        <div className='p-2 m-4 text-3xl font-serif text-gray-800 font-bold text-center flex flex-col w-full'>            Objetivos
+          <div className='p-2 m-4 text-3xl font-serif text-gray-800 font-bold text-center flex flex-col w-full'>            Objetivos
             <div className="my-2 self-end">
-            <Link to={`/proyectos/${dataProyecto.Proyecto._id}/objetivo`}>
-              <i className='fas fa-plus-circle text-purple-700 hover:text-green-600 cursor-pointer
+              <Link to={`/proyectos/${dataProyecto.Proyecto._id}/objetivo`}>
+                <i className='fas fa-plus-circle text-purple-700 hover:text-green-600 cursor-pointer
                         p-1 px-2 hover:bg-green-100 rounded-full' />
-            </Link>
-          </div>
+              </Link>
+            </div>
           </div>
           <table className='tabla '>
             <thead>
@@ -145,12 +146,14 @@ const Proyecto = () => {
       <div className="p-10 flex flex-col">
         <div className='p-2 m-4 text-3xl font-serif text-gray-800 font-bold text-center flex flex-col w-full'>
           Avances
-          <div className="my-2 self-end">
-            <Link to={`/proyectos/${dataProyecto.Proyecto._id}/avance`}>
-              <i className='fas fa-plus-circle text-purple-700 hover:text-green-600 cursor-pointer
+          <PrivateComponent roleList={["ESTUDIANTE", "ADMINISTRADOR"]}>
+            <div className="my-2 self-end">
+              <Link to={`/proyectos/${dataProyecto.Proyecto._id}/avance`}>
+                <i className='fas fa-plus-circle text-purple-700 hover:text-green-600 cursor-pointer
                         p-1 px-2 hover:bg-green-100 rounded-full' />
-            </Link>
-          </div>
+              </Link>
+            </div>
+          </PrivateComponent>
         </div>
         <table className='tabla '>
           <thead>
@@ -180,9 +183,9 @@ const Proyecto = () => {
                         <i className='fas fa-pen text-green-400 hover:text-green-600 cursor-pointer
                         p-1 px-2 hover:bg-green-100 rounded-full' />
                       </Link>
-                    
+
                       <i
-                      className="fas fa-trash-alt text-red-400 hover:bg-red-100 rounded-full 
+                        className="fas fa-trash-alt text-red-400 hover:bg-red-100 rounded-full 
                       cursor-pointer hover:text-red-600 px-2 p-1"></i>
                     </td>
                   </tr>

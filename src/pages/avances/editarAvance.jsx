@@ -9,6 +9,7 @@ import Input from 'components/Input';
 import ButtonLoading from 'components/ButtonLoading';
 import { useUser } from 'context/userContext';
 import { Hidden } from '@material-ui/core';
+import PrivateComponent from 'components/PrivateComponent';
 
 
 const EditarAvance = () => {
@@ -58,18 +59,22 @@ const EditarAvance = () => {
         <i className='fas fa-arrow-left text-gray-600 cursor-pointer font-bold text-xl hover:text-gray-900' />
       </Link>
       <h1 className='m-4 text-3xl text-gray-800 font-bold text-center'>Editar Avance</h1>
-      <form  onSubmit={submitForm} onChange={updateFormData} ref={form} 
-      className='flex flex-col items-center justify-center'>
-        <Input
-          label='Descripción Avance:' type='text' name='descripcion'
-          defaultValue={queryData.avance.descripcion}
-          required={userData.rol ==="ESTUDIANTE"?true:false}                             
-        />
-        <Input
-          label='Observaciones:' type='text' name='observaciones'
-          defaultValue={queryData.avance.observaciones}
-          required={userData.rol ==="LIDER"?true:false}                 
-        />
+      <form onSubmit={submitForm} onChange={updateFormData} ref={form}
+        className='flex flex-col items-center justify-center'>
+        <PrivateComponent roleList={["ESTUDIANTE"]}>
+          <Input
+            label='Descripción Avance:' type='text' name='descripcion'
+            defaultValue={queryData.avance.descripcion}
+            required={userData.rol === "ESTUDIANTE" ? true : false}
+          />
+        </PrivateComponent>
+        <PrivateComponent roleList={["LIDER"]}>
+          <Input
+            label='Observaciones:' type='text' name='observaciones'
+            defaultValue={queryData.avance.observaciones}
+            required={userData.rol === "LIDER" ? true : false}
+          />
+        </PrivateComponent>
         <ButtonLoading
           disabled={Object.keys(formData).length === 0}
           loading={mutationLoading}
