@@ -1,28 +1,45 @@
 import React, { useEffect } from "react";
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { toast } from "react-toastify";
 //import { Link } from "react-router-dom";
 import "styles/tabla.css";
 import PrivateRoute from "components/PrivateRoute";
 import ReactLoading from "react-loading";
 import { GET_PROYECTOS } from "graphql/proyectos/queries";
+import { GET_INSCRIPCIONES } from "graphql/inscripcion/queries";
+import { CREAR_INSCRIPCION } from 'graphql/inscripcion/mutations';
 import Card from "../../components/Card";
-import { CardNew } from "../../components/Card";
+import { CardNew, CardStudent } from "../../components/Card";
 import PrivateComponent from "../../components/PrivateComponent";
 import NavBar from 'components/Navbar';
+import { useUser } from 'context/userContext';
+
+
 
 const IndexProyecto = () => {
-  const { data, error, loading } = useQuery(GET_PROYECTOS);
+  
+  const { userData } = useUser();
 
-  useEffect(() => {
-    console.log("data servidor uno", data);
-  }, [data]);
+  const _id = userData._id;
+
+  const { data, error, loading } = useQuery(GET_PROYECTOS);
+  
+  const {data: dataI} = useQuery(GET_INSCRIPCIONES);
+
+  const [crearInscripcion, {data: dataC, error: errorC, loading: loadingC}] = useMutation(CREAR_INSCRIPCION);
 
   useEffect(() => {
     if (error) {
       toast.error("Error consultando los proyectos");
     }
   }, [error]);
+
+  useEffect(() => {
+    if (errorC) {
+      console.log(errorC)
+      toast.error("Error consultando los proyectos");
+    }
+  }, [errorC]);
 
   //para ver la ruedita mientras carga la info de usuarios
   if (loading)
@@ -32,7 +49,40 @@ const IndexProyecto = () => {
       </div>
     );
 
+  const Comprobar = (proyectoId) => {
+    let estado = false;
+    let proyecto = false;
+
+    dataI.Inscripciones.map((i)=>{
+      if(_id === i.estudiante._id){
+        estado = true;
+      }
+    });
+
+    dataI.Inscripciones.map((i)=>{
+      if(proyectoId === i.proyecto._id){
+        proyecto = true;
+      }
+    });
+
+    if(estado && proyecto){
+      toast.error("Ya estás inscrito en este proyecto");
+    }else{
+      crearInscripcion({
+        variables: {
+          proyecto: proyectoId,
+          estudiante: _id,
+        },
+      });
+      if(loadingC){
+        toast.error("Estácargando");
+      }else if(errorC){
+        toast.error("No estás inscrito en este proyecto");
+      }
+    }
+  }    
     
+
   return (
     <PrivateRoute roleList={["LIDER", "ADMINISTRADOR", "ESTUDIANTE"]}>
       <div className="items-center font-serif text-gray-800">
@@ -41,17 +91,33 @@ const IndexProyecto = () => {
           <PrivateComponent roleList={["ADMINISTRADOR", "LIDER"]}>
             <CardNew />
           </PrivateComponent>
-          {data && data.Proyectos.map((proyecto) => {
-            return (
-              <Card
-                Key={proyecto._id}
-                nombre={proyecto.nombre}
-                lider={proyecto.lider?proyecto.lider.nombre:""}
-                estado={proyecto.estado}
-                fase={proyecto.fase}
-              />
-            );
-          })}
+          <PrivateComponent roleList={["ESTUDIANTE"]}>
+            {data && data.Proyectos.map((proyecto) => {
+              return (
+                <Card
+                  Key={proyecto._id}
+                  nombre={proyecto.nombre}
+                  lider={proyecto.lider?proyecto.lider.nombre:""}
+                  estado={proyecto.estado}
+                  fase={proyecto.fase}
+                />
+              );
+            })}
+          </PrivateComponent>
+          <PrivateComponent roleList={["LIDER", "ADMINISTRADOR","ESTUDIANTE"]}>
+            {data && data.Proyectos.map((proyecto) => {
+              return (
+                <CardStudent
+                  Key={proyecto._id}
+                  nombre={proyecto.nombre}
+                  lider={proyecto.lider?proyecto.lider.nombre:""}
+                  estado={proyecto.estado}
+                  fase={proyecto.fase}
+                  onClick={() => Comprobar(proyecto._id)}
+                />
+              );
+            })}
+          </PrivateComponent>
         </div>
       </div>
     </PrivateRoute>
