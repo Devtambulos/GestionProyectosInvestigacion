@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Input = ({ label, name, defaultValue, type, required, disabled }) => {
+const Input = ({ label, name, defaultValue, type, required, disabled, hidden}) => {
   return (
     <label htmlFor={name} className='flex flex-col my-3'>
       <span>{label}</span>
@@ -11,6 +11,7 @@ const Input = ({ label, name, defaultValue, type, required, disabled }) => {
         name={name}
         className='input'
         defaultValue={defaultValue}
+        hidden={hidden}
       />
     </label>
   );

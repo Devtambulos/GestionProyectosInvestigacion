@@ -7,9 +7,12 @@ import { EDITAR_AVANCE } from 'graphql/avances/mutations';
 import { toast } from 'react-toastify';
 import Input from 'components/Input';
 import ButtonLoading from 'components/ButtonLoading';
+import { useUser } from 'context/userContext';
+import { Hidden } from '@material-ui/core';
 
 
 const EditarAvance = () => {
+  const { userData } = useUser()
   const { form, formData, updateFormData } = useFormData();
   const { _id } = useParams();
 
@@ -60,12 +63,12 @@ const EditarAvance = () => {
         <Input
           label='Descripción Avance:' type='text' name='descripcion'
           defaultValue={queryData.avance.descripcion}
-          required={true}
+          required={userData.rol ==="ESTUDIANTE"?true:false}                             
         />
         <Input
           label='Observaciones:' type='text' name='observaciones'
           defaultValue={queryData.avance.observaciones}
-          required={true}
+          required={userData.rol ==="LIDER"?true:false}                 
         />
         <ButtonLoading
           disabled={Object.keys(formData).length === 0}

@@ -37,8 +37,7 @@ const CrearAvance = () => {
 
     useEffect(() => {
         if (dataMutation) {
-            toast.success('Avance creado con éxito');
-            //navigate(`/proyectos/${_id}`);
+            toast.success('Avance creado con éxito');            
         }
         if (errorMutation){
             toast.error('Error modificando el avance');
