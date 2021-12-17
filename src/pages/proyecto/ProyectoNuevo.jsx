@@ -20,10 +20,6 @@ const ProyectoNuevo = () => {
     const { userData, setUserData } = useUser();
     const { form, formData, updateFormData } = useFormData(null);
     
-    const { data,
-        error,
-        loading } = useQuery(GET_PROYECTOS);
-    
     const [crearProyecto, {
         data: mutationData,
         loading: mutationLoading,
@@ -35,24 +31,30 @@ const ProyectoNuevo = () => {
         e.preventDefault();
         console.log('fd', formData);
         const presupuesto = parseFloat(formData.presupuesto);
-    
+        delete formData.presupuesto;
+
         crearProyecto({
-            variables: {...formData},
+            variables: {...formData, presupuesto,lider: userData._id},
         });
+        window.location.href="/proyectos"
+
         };
         
         useEffect(() => {
-          console.log("data servidor uno", data);
-        }, [data]);
+          if(mutationData){
+          toast.success('Proyecto creado correctamente');
+
+          console.log("proyecto creado", mutationData);}
+        }, [mutationData]);
      
         useEffect(() => {
-          if (error) {
+          if (mutationError) {
             toast.error("Error consultando los proyectos");
           }
-        }, [error]);
+        }, [mutationError]);
       
         //para ver la ruedita mientras carga la info de usuarios
-        if (loading)
+        if (mutationLoading)
           return (
             <div className="flex justify-center items-center w-full h-full">
               <ReactLoading type="spin" color="blue" height={"20%"} width={"20%"} />{" "}
@@ -63,11 +65,13 @@ const ProyectoNuevo = () => {
 
 
     return(<>
- <div className='w-full h-full items-center justify-center'>
-        <NavBar titulo="Editar Proyectos"/>
-        {/* <Link to={`/proyectos/${queryData.Proyecto._id}`}>
+ <div className='w-full items-center justify-center'>
+        <NavBar titulo="Crear Proyecto"/>
+        <Link
+        className='m-2 p-2'
+        to={`/proyectos`}>
           <i className='fas fa-arrow-left text-gray-600 cursor-pointer font-bold text-xl hover:text-gray-900' />
-        </Link> */}
+        </Link>
         <div className='flew flex-col w-full h-full items-center justify-center p-10'>
         <form
           onSubmit={submitForm}
@@ -79,7 +83,6 @@ const ProyectoNuevo = () => {
             label='Nombre del Proyecto:'
             type='text'
             name='nombre'
-            // defaultValue={queryData.Proyecto.nombre}
             required={true}
           />
           
@@ -87,7 +90,6 @@ const ProyectoNuevo = () => {
             label='Presupuesto del proyecto:'
             type='number'
             name='presupuesto'
-            // defaultValue={queryData.Proyecto.presupuesto}
             required={true}
           />
                     
@@ -95,30 +97,15 @@ const ProyectoNuevo = () => {
             label='fecha inicio:'
             type='date'
             name='fechaInicio'
-            // defaultValue={queryData.Proyecto.fechaInicio}
             required={false}
           />
           <Input
             label='fecha fin:'
             type='date'
             name='fechaFin'
-            // defaultValue={queryData.Proyecto.fechaFin}
             required={false}
           />
-          <DropDown
-            label='Fase del proyecto:'
-            name='fase'
-            // defaultValue={queryData.Proyecto.fase}
-            required={true}
-            options={Enum_FaseProyecto}
-          />
-            <DropDown
-            label='Estado del proyecto:'
-            name='estado'
-            // defaultValue={queryData.Proyecto.estado}
-            required={true}
-            options={Enum_EstadoProyecto}
-          />
+
           <ButtonLoading
             disabled={Object.keys(formData).length === 0}
             loading={mutationLoading}
