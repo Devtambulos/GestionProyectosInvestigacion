@@ -30,16 +30,18 @@ const CrearObjetivo = () => {
         crearObjetivo({
           variables: { ...formData, proyecto:_id },
         });
+        if(dataMutation){
+        toast.success('Objetivo creado correctamente');};
+        window.location.href=`/proyectos/${_id}`
       };
       
 
     useEffect(() => {
+      if(dataMutation){
+        toast.success('Objetivo creado correctamente');};
         console.log("Data mutation", dataMutation);
     
-      if (dataMutation) {
-        toast.success('Objetivo creado correctamente');
-        navigate(`/proyectos/${_id}`);
-      }
+       
     }, [dataMutation]);
 
     return (

@@ -36,6 +36,8 @@ const ProyectoNuevo = () => {
         crearProyecto({
             variables: {...formData, presupuesto,lider: userData._id},
         });
+        if(mutationData){
+          toast.success('Proyecto creado correctamente');};
         window.location.href="/proyectos"
 
         };

@@ -29,6 +29,10 @@ const CrearAvance = () => {
         crearAvance({
             variables: { ...formData, proyecto: _id, creadoPor: userData._id },
         });
+        if(dataMutation){
+            toast.success('Avance creado correctamente');};
+          window.location.href=`/proyectos/${_id}`
+
     };
 
     useEffect(() => {
