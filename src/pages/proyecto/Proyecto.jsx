@@ -184,8 +184,6 @@ const Proyecto = () => {
                       <i
                       className="fas fa-trash-alt text-red-400 hover:bg-red-100 rounded-full 
                       cursor-pointer hover:text-red-600 px-2 p-1"></i>
-
-
                     </td>
                   </tr>
                 );
