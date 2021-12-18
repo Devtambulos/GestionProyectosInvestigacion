@@ -27,6 +27,13 @@ query Query {
         descripcion
         observaciones
       }
+      inscripciones{
+        _id
+        estudiante {
+            _id
+          }
+        
+      }
     }
   }
 `;

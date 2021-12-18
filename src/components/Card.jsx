@@ -3,8 +3,11 @@ import { ReactComponent as IconCheckOn } from "../../src/assets/img/iconCheckOn.
 import { ReactComponent as IconInfo } from "../../src/assets/img/iconInfo.svg";
 import { ReactComponent as VectorNew} from "../../src/assets/vectors/vectorNew.svg";
 import { Link } from "react-router-dom";
+import { useUser } from '../context/userContext';
+
 
 export default function Card(props) {
+  
   return (
     <>
       <Link to={`/proyectos/${props.Key}`}>
@@ -49,6 +52,8 @@ export default function Card(props) {
 }
 
 export function CardStudent(props) {
+  const { userData } = useUser();
+  console.log(userData);
   return (
     <>
         <div key={props.Key} className="cursor-pointer shadow-DropDown rounded-xl p-4 w-full">
@@ -80,8 +85,12 @@ export function CardStudent(props) {
           </div>
           
       </Link>
-          <div className="bottom-0 hover:bg-indigo-400 justify-center rounded-lg bg-indigo-800 py-2 text-gray text-sm w-full flex items-center">
-            <button className="h-full w-full text-center text-white" onClick={props.onClick}>Inscribir{props.inscrito}</button>
+          <div className={userData.rol === "ESTUDIANTE"
+          ?"bottom-0 hover:bg-indigo-400 justify-center rounded-lg bg-indigo-800 py-2 text-gray text-sm w-full flex items-center"
+          :"hidden"}>
+            <button
+            hidden = {props.hidden}
+            className="h-full w-full text-center text-white" onClick={props.onClick}>Inscribir{props.inscrito}</button>
           </div>
         </div>
     </>

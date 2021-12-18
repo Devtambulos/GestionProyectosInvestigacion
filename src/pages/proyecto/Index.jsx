@@ -23,9 +23,8 @@ const IndexProyecto = () => {
   const _id = userData._id;
 
   const { data, error, loading } = useQuery(GET_PROYECTOS);
-  
+  console.log("proyectos",data);
   const {data: dataI} = useQuery(GET_INSCRIPCIONES);
-
   const [crearInscripcion, {error: errorC}] = useMutation(CREAR_INSCRIPCION);
 
   useEffect(() => {
@@ -85,7 +84,7 @@ const IndexProyecto = () => {
           <PrivateComponent roleList={["ADMINISTRADOR", "LIDER"]}>
             <CardNew />
           </PrivateComponent>
-          <PrivateComponent roleList={["ESTUDIANTE"]}>
+          {/* <PrivateComponent roleList={["ESTUDIANTE"]}>
             {data && data.Proyectos.map((proyecto) => {
               return (
                 <Card
@@ -97,7 +96,7 @@ const IndexProyecto = () => {
                 />
               );
             })}
-          </PrivateComponent>
+          </PrivateComponent> */}
           <PrivateComponent roleList={["LIDER", "ADMINISTRADOR","ESTUDIANTE"]}>
             {data && data.Proyectos.map((proyecto) => {
               return (
