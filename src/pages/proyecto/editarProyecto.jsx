@@ -11,8 +11,13 @@ import DropDown from 'components/Dropdown';
 import { Enum_FaseProyecto } from 'utils/enums';
 import { Enum_EstadoProyecto } from 'utils/enums';
 import NavBar from 'components/Navbar';
+import PrivateRoute from "components/PrivateRoute";
+import { useUser } from 'context/userContext';
+
+
 
 const EditarProyecto = () => {
+  const { userData, setUserData } = useUser();
   const { form, formData, updateFormData } = useFormData();
   const { _id } = useParams();
 
@@ -62,6 +67,8 @@ const EditarProyecto = () => {
     if (queryLoading, queryLoading) return <div>Cargando....</div>;
   
     return (
+      <PrivateRoute roleList={["LIDER","ADMINISTRADOR",]}>
+      
       <div className='w-full h-full items-center justify-center'>
         <NavBar titulo="Editar Proyectos"/>
         <Link to={`/proyectos/${queryData.Proyecto._id}`}>
@@ -80,9 +87,11 @@ const EditarProyecto = () => {
             name='nombre'
             defaultValue={queryData.Proyecto.nombre}
             required={true}
+            
           />
           
           <Input
+            className="hidden"
             label='Presupuesto del proyecto:'
             type='number'
             name='presupuesto'
@@ -94,6 +103,7 @@ const EditarProyecto = () => {
             label='fecha inicio:'
             type='date'
             name='fechaInicio'
+            hidden = {userData.rol === "LIDER"?true:userData.rol === "ADMINISTRADOR"?false:true}
             defaultValue={queryData.Proyecto.fechaInicio}
             required={false}
           />
@@ -101,12 +111,14 @@ const EditarProyecto = () => {
             label='fecha fin:'
             type='date'
             name='fechaFin'
+            hidden = {userData.rol === "LIDER"?true:userData.rol === "ADMINISTRADOR"?false:true}
             defaultValue={queryData.Proyecto.fechaFin}
             required={false}
           />
           <DropDown
             label='Fase del proyecto:'
             name='fase'
+            hidden = {userData.rol === "LIDER"?true:userData.rol === "ADMINISTRADOR"?false:true}
             defaultValue={queryData.Proyecto.fase}
             required={true}
             options={Enum_FaseProyecto}
@@ -114,6 +126,7 @@ const EditarProyecto = () => {
             <DropDown
             label='Estado del proyecto:'
             name='estado'
+            hidden = {userData.rol === "LIDER"?true:userData.rol === "ADMINISTRADOR"?false:true}
             defaultValue={queryData.Proyecto.estado}
             required={true}
             options={Enum_EstadoProyecto}
@@ -126,6 +139,8 @@ const EditarProyecto = () => {
         </form>
       </div>
       </div>
+      </PrivateRoute>
+
     );
   };
   

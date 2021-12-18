@@ -77,7 +77,9 @@ const Proyecto = () => {
         {/* DATOS DEL PROYECTO */}
         PROYECTO ID: {dataProyecto.Proyecto._id}
         <div className="flex pl">
-          <Link to={`/proyectos/editar/${dataProyecto.Proyecto._id}`} >
+          <Link
+          hidden = {userData.rol === "LIDER"?false:userData.rol === "ADMINISTRADOR"?false:true}                      
+          to={`/proyectos/editar/${dataProyecto.Proyecto._id}`} >
             <i className='fas fa-pen text-green-400 hover:text-green-600 cursor-pointer
                         p-1 px-2 hover:bg-green-100 rounded-full' />
           </Link>

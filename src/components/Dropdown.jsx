@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { nanoid } from 'nanoid';
 
-const DropDown = ({ label, name, defaultValue = '', required, options }) => {
+const DropDown = ({ label, name, defaultValue = '', required, options, hidden }) => {
   const [selectedValue, setSelectedValue] = useState(defaultValue);
   const optionsSelect = [['', 'Seleccione una opción', true], ...Object.entries(options)];
   useEffect(() => {
     setSelectedValue(defaultValue);
   }, [defaultValue]);
   return (
-    <label htmlFor={name} className='flex flex-col my-3'>
+    <label htmlFor={name} className={!hidden === true?"flex flex-col my-3":"hidden"}>
       <span>{label}</span>
       <select
         required={required}
@@ -16,6 +16,7 @@ const DropDown = ({ label, name, defaultValue = '', required, options }) => {
         className='input'
         value={selectedValue}
         onChange={(e) => setSelectedValue(e.target.value)}
+        
       >
         {optionsSelect.map((o) => {
           return (

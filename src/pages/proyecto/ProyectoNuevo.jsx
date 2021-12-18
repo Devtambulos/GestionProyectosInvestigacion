@@ -13,6 +13,7 @@ import NavBar from 'components/Navbar';
 import { useUser } from 'context/userContext';
 import ReactLoading from "react-loading";
 import { CREAR_PROYECTO } from 'graphql/proyectos/mutations';
+import PrivateRoute from "components/PrivateRoute";
 
 
 const ProyectoNuevo = () => {
@@ -66,8 +67,10 @@ const ProyectoNuevo = () => {
 
 
 
-    return(<>
- <div className='w-full items-center justify-center'>
+    return(
+    
+    <PrivateRoute roleList={["LIDER","ADMINISTRADOR",]}>
+    <div className='w-full items-center justify-center'>
         <NavBar titulo="Crear Proyecto"/>
         <Link
         className='m-2 p-2'
@@ -115,7 +118,11 @@ const ProyectoNuevo = () => {
           />
         </form>
       </div>
-      </div>    </>)
+      </div>  
+      </PrivateRoute>
+ 
+        
+      )
 }
 
 export default ProyectoNuevo;
