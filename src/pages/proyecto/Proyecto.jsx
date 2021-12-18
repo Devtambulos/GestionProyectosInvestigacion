@@ -48,6 +48,8 @@ const Proyecto = () => {
       variables: { _id }
     });
 
+    console.log("proyecto", dataProyecto)
+
   //  console.log("Datos de Objetivos:", dataObjetivos);
 
   useEffect(() => {
@@ -90,7 +92,7 @@ const Proyecto = () => {
 
       LIDER: {dataProyecto.Proyecto.lider ? dataProyecto.Proyecto.lider.nombre + " " + dataProyecto.Proyecto.lider.apellido : ""}
       <br />
-      PRESUPUESTO: {dataProyecto.Proyecto.presupuesto}
+      PRESUPUESTO: {dataProyecto.Proyecto.inscripciones[0].estado}
       <br />
       INICIO: {dataProyecto.Proyecto.fechaInicio}
       <br />
@@ -154,7 +156,8 @@ const Proyecto = () => {
           <PrivateComponent roleList={["ESTUDIANTE", "ADMINISTRADOR"]}>
             <Tooltip title="Crear Avance" arrow>
               <div className="my-2 self-end">
-                <Link to={`/proyectos/${dataProyecto.Proyecto._id}/avance`}>
+                <Link
+                to={`/proyectos/${dataProyecto.Proyecto._id}/avance`}>
                   <i className='fas fa-plus-circle text-purple-700 hover:text-green-600 cursor-pointer
                         p-1 px-2 hover:bg-green-100 rounded-full' />
                 </Link>
