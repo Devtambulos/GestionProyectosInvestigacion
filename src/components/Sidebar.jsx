@@ -1,17 +1,20 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "context/authContext";
+import { useUser } from 'context/userContext';
 import PrivateComponent from "./PrivateComponent";
 import { Link } from "react-router-dom";
 
 
 const SidebarLinks = () => {
+
+
   return (
     <div className="sidebar">
       <Logo />
       <ul className="mt-12">       
         <SidebarRoute to="/" title="Inicio" icon="fas fa-home" />
-        <SidebarRoute to='/perfil' title='Perfil' icon='fas fa-user' />
+        <SidebarRouteImagen to='/perfil' title='Perfil' icon='fas fa-user' />
         <PrivateComponent roleList={["ADMINISTRADOR", "LIDER"]}>
           <SidebarRoute to="/usuarios" title="Usuarios" icon="fas fa-users" />
         </PrivateComponent>
@@ -58,7 +61,7 @@ const SidebarLinksHide = () => {
 
 const SidebarLinksResponsive = () => {
   return (
-    <ul className="w-full items-center justify-center">      
+    <ul className="items-center justify-center">      
         <SidebarRoute to="/" title="Inicio" icon="fas fa-home" />
         <SidebarRoute to='/perfil' title='Perfil' icon='fas fa-user' />
         <SidebarRoute to="/avances" title="Avances" icon="fas fa-smile-wink" />
@@ -78,10 +81,13 @@ const SidebarLinksResponsive = () => {
 };
 
 const Logo = () => {
+  const { userData } = useUser();
   return (
     <div className="py-3 w-full flex flex-col items-center justify-center">
+       
       <img src="DevProject_logo.png" alt="Logo" className="h-16" />
-      <span className="my-2 text-xl font-bold text-center">DevProject</span>
+      <span className="mt-6 py-1 text-xl font-bold text-center"> {userData.nombre}  {userData.apellido} </span>
+      <span className="py-1 text-base font-bold text-center"> {userData.rol} </span>
     </div>
   );
 };
@@ -144,12 +150,12 @@ const ResponsiveSidebar = () => {
 
 const SidebarRoute = ({ to, title, icon, posicion }) => {
   return (
-    <li className="my-5">
+    <li className="my-8">
       <NavLink
         to={to}
         className={({ isActive }) =>
           isActive
-            ? "sidebar-route text-white bg-indigo-700"
+            ? "sidebar-route text-white bg-indigo-700 font-bold text-xl"
             : "sidebar-route hover:bg-indigo-400"
         }
       >
@@ -158,7 +164,7 @@ const SidebarRoute = ({ to, title, icon, posicion }) => {
         >
           {posicion ? (
             <>
-              <i className={`${icon} mx-2`} />
+              <i className={`${icon} mx-1`} />
               {/* <label className="text-sm pl-16 font-semibold absolute invisible">
                 {title}
               </label> */}
@@ -166,7 +172,7 @@ const SidebarRoute = ({ to, title, icon, posicion }) => {
           ) : (
             <>
               <i className={`${icon}`} />
-              <span className={`text-sm  ml-2`}>{title}</span>
+              <span className={`text-base  ml-2`}>{title}</span>
             </>
           )}
         </div>
@@ -188,11 +194,41 @@ const Logout = ({text}) => {
         <div className="flex items-center">
           <i className="fas fa-sign-out-alt" />
           
-          <span className="text-sm  ml-2">{text}</span>
+          <span className="text-base  ml-2">{text}</span>
         </div>
       </Link>
     </li>
   );
 };
+
+const SidebarRouteImagen = ({ to, title, icon }) => {
+  const { userData } = useUser();
+  return (
+    <li>
+      <NavLink
+        to={to}
+        className={({ isActive }) =>
+          isActive
+            ? 'sidebar-route text-white bg-indigo-700 font-bold text-lg'
+            : 'sidebar-route text-gray-900 hover:text-white hover:bg-indigo-400'
+        }
+      >
+        <div className='flex items-center'>
+          {userData.foto ? (
+            <img
+              className='h-8 w-8 rounded-full'
+              src={userData.foto}
+              alt='foto'
+            />
+          ) : (
+            <i className={icon} />
+          )}
+          <span className='text-base  ml-2'>{title}</span>
+        </div>
+      </NavLink>
+    </li>
+  );
+};
+
 
 export default Sidebar;

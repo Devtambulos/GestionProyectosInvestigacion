@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 import { EDITAR_USUARIO } from 'graphql/usuarios/mutations';
 import DropDown from 'components/Dropdown';
 import { Enum_EstadoUsuario } from 'utils/enums';
-
+import NavBar from 'components/Navbar';
 
 const EditarUsuario = () => {
   const { form, formData, updateFormData } = useFormData(null);
@@ -23,7 +23,6 @@ const EditarUsuario = () => {
     variables: { _id },
   });
 
-  console.log(queryData);
 
   const [editarUsuario, {
     data: mutationData,
@@ -33,7 +32,6 @@ const EditarUsuario = () => {
 
   const submitForm = (e) => {
     e.preventDefault();
-    console.log('fd',_id, formData);
     delete formData.rol;
     editarUsuario({
       variables: { _id, ...formData },
@@ -59,11 +57,12 @@ const EditarUsuario = () => {
   if (queryLoading) return <div>Cargando....</div>;
 
   return (
-    <div className='flew flex-col w-full h-full items-center justify-center p-10'>
+    <div className=' w-full h-full items-center justify-center'>
+      <NavBar titulo="Editar Usuarios"/>
       <Link to='/usuarios'>
         <i className='fas fa-arrow-left text-gray-600 cursor-pointer font-bold text-xl hover:text-gray-900' />
       </Link>
-      <h1 className='m-4 text-3xl text-gray-800 font-bold text-center'>Editar Usuario</h1>
+      <div className='flew flex-col w-full h-full items-center justify-center p-10'>
       <form
         onSubmit={submitForm}
         onChange={updateFormData}
@@ -112,6 +111,7 @@ const EditarUsuario = () => {
           text='Confirmar'
         />
       </form>
+    </div>
     </div>
   );
 };

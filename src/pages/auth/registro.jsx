@@ -9,7 +9,7 @@ import { REGISTRO } from "graphql/auth/mutation";
 import { useMutation } from "@apollo/client";
 import { useNavigate } from "react-router";
 import { useAuth } from "context/authContext";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 const Registro = () => {
   const { setToken } = useAuth();
@@ -40,22 +40,24 @@ const Registro = () => {
     }
   }, [dataMutation, navigate, setToken]);
 
-  useEffect(()=>{
-    console.log("0 error", errorMutation)
-    if(errorMutation || dataMutation){
-      if(errorMutation || dataMutation.registro.error){
-        toast.error('Error: Ingresaste un dato invalido');
-        toast.info('Prueba ingresando otro correo y/o tu documento de identidad correctamente')
-        console.log("1 error", errorMutation)
+  useEffect(() => {
+    console.log("0 error", errorMutation);
+    if (errorMutation || dataMutation) {
+      if (errorMutation || dataMutation.registro.error) {
+        toast.error("Error: Ingresaste un dato invalido");
+        toast.info(
+          "Prueba ingresando otro correo y/o tu documento de identidad correctamente"
+        );
+        console.log("1 error", errorMutation);
       }
     }
-  },[errorMutation, dataMutation])
+  }, [errorMutation, dataMutation]);
 
   return (
     <div className="flex  flex-col h-full w-full p-14 items-center justify-center">
       <div className="justify-self-start self-start">
-        <Link to='/inicio'>
-          <i className='fas fa-arrow-left text-gray-600 cursor-pointer font-bold text-xl hover:text-gray-900' />
+        <Link to="/inicio">
+          <i className="fas fa-arrow-left text-gray-600 cursor-pointer font-bold text-xl hover:text-gray-900" />
         </Link>
       </div>
       <h1 className="text-3xl font-bold my-4">Regístrate</h1>

@@ -30,4 +30,36 @@ mutation EditarProyecto(
   }
 `;
 
-export {EDITAR_PROYECTO};
+const CREAR_PROYECTO = gql `
+mutation Mutation(
+  $nombre: String!
+  $presupuesto: Float!
+  $lider: String!
+  $fechaInicio: Date
+  $fechaFin: Date
+  $estado: Enum_EstadoProyecto
+  $fase: Enum_FaseProyecto) {
+  crearProyecto(
+    nombre: $nombre
+    presupuesto: $presupuesto
+    lider: $lider
+    fechaInicio: $fechaInicio
+    fechaFin: $fechaFin
+    estado: $estado
+    fase: $fase) {
+    _id
+    nombre
+    presupuesto
+    fechaInicio
+    fechaFin
+    estado
+    fase
+    lider {
+      _id
+    }
+  }
+}
+`;
+
+
+export {EDITAR_PROYECTO, CREAR_PROYECTO};

@@ -6,15 +6,10 @@ import { Link } from 'react-router-dom';
 import { Enum_Rol, Enum_EstadoUsuario } from 'utils/enums';
 import 'styles/tabla.css';
 import PrivateRoute from 'components/PrivateRoute';
-
+import NavBar from 'components/Navbar';
 import ReactLoading from 'react-loading';
-
 const UsuarioIndex = () => {
   const { data, error, loading } = useQuery(GET_USUARIOS);
-
-  useEffect(() => {
-    console.log('data servidor', data);
-  }, [data]);
 
   useEffect(() => {
       if (error) {
@@ -33,10 +28,9 @@ if (loading){
 
   return (
     <PrivateRoute roleList={["LIDER","ADMINISTRADOR",]}>
-      <div className="p-8 items-center font-serif text-gray-800">
-        <div className="p-2 m-4 text-3xl font-serif text-gray-800 font-bold text-center w-full justify-center ">
-          Datos Usuarios
-        </div>
+      <div className="items-center font-serif text-gray-800">
+      <NavBar titulo="Datos de los Usuarios"/>
+        <div className="p-8 items-center font-serif text-gray-800">
         <table className='tabla '>
           <thead>
             <tr>
@@ -71,6 +65,7 @@ if (loading){
               })}
           </tbody>
         </table>
+        </div>
       </div>
     </PrivateRoute>
   );

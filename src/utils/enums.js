@@ -26,7 +26,6 @@ const Enum_FaseProyecto = {
 const Enum_EstadoInscripcion = {
   ACEPTADO : 'ACEPTADO',
   RECHAZADO : 'RECHAZADO',
-  PENDIENTE : 'PENDIENTE'
 };
 
 const Enum_TipoObjetivo = {

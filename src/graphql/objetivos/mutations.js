@@ -12,12 +12,17 @@ mutation EditarObjetivo(
   }
 `;
 
-const ELIMINAR_OBJETIVO = gql`
-mutation EliminarObjetivo($_id: String!) {
-    eliminarObjetivo(_id: $_id) {
-      _id
-    }
+const CREAR_OBJETIVO = gql`
+mutation Mutation(
+  $descripcion: String!
+  $tipo: Enum_TipoObjetivo!
+  $proyecto: String!) {
+  crearObjetivo(descripcion: $descripcion, tipo: $tipo, proyecto: $proyecto) {
+    _id
+    descripcion
+    tipo
   }
+}
 `;
 
-export {EDITAR_OBJETIVO, ELIMINAR_OBJETIVO};
+export {EDITAR_OBJETIVO, CREAR_OBJETIVO};

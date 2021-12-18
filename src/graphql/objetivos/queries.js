@@ -6,6 +6,9 @@ query FiltrarObjetivo($_id: String!) {
     _id
     descripcion
     tipo
+    proyecto {
+      _id
+    }
   }
 }`;
 
