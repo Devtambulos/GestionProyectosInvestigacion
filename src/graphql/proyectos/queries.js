@@ -27,6 +27,13 @@ query Query {
         descripcion
         observaciones
       }
+      inscripciones{
+        _id
+        estudiante {
+            _id
+          }
+        
+      }
     }
   }
 `;
@@ -57,6 +64,12 @@ const GET_PROYECTO = gql`
         fecha
         descripcion
         observaciones
+      }
+      inscripciones {
+        _id
+        estado
+        fechaIngreso
+        fechaEgreso
       }
     }
   }

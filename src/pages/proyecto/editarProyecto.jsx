@@ -10,9 +10,14 @@ import { toast } from 'react-toastify';
 import DropDown from 'components/Dropdown';
 import { Enum_FaseProyecto } from 'utils/enums';
 import { Enum_EstadoProyecto } from 'utils/enums';
-import { parse } from 'postcss';
+import NavBar from 'components/Navbar';
+import PrivateRoute from "components/PrivateRoute";
+import { useUser } from 'context/userContext';
+
+
 
 const EditarProyecto = () => {
+  const { userData, setUserData } = useUser();
   const { form, formData, updateFormData } = useFormData();
   const { _id } = useParams();
 
@@ -24,7 +29,7 @@ const EditarProyecto = () => {
     variables: { _id },
   });
 
-  console.log(queryData);
+  console.log("query",queryData);
   
   const [editarProyecto, {
     data: mutationData,
@@ -59,15 +64,17 @@ const EditarProyecto = () => {
       }
     }, [queryError, mutationError]);
   
-    if (queryLoading) return <div>Cargando....</div>;
+    if (queryLoading, queryLoading) return <div>Cargando....</div>;
   
     return (
-      <div className='flew flex-col w-full h-full items-center justify-center p-10'>
-          editar proyectos
+      <PrivateRoute roleList={["LIDER","ADMINISTRADOR",]}>
+      
+      <div className='w-full h-full items-center justify-center'>
+        <NavBar titulo="Editar Proyectos"/>
         <Link to={`/proyectos/${queryData.Proyecto._id}`}>
           <i className='fas fa-arrow-left text-gray-600 cursor-pointer font-bold text-xl hover:text-gray-900' />
         </Link>
-        <h1 className='m-4 text-3xl text-gray-800 font-bold text-center'>Editar Proyecto</h1>
+        <div className='flew flex-col w-full h-full items-center justify-center p-10'>
         <form
           onSubmit={submitForm}
           onChange={updateFormData}
@@ -80,9 +87,11 @@ const EditarProyecto = () => {
             name='nombre'
             defaultValue={queryData.Proyecto.nombre}
             required={true}
+            
           />
           
           <Input
+            className="hidden"
             label='Presupuesto del proyecto:'
             type='number'
             name='presupuesto'
@@ -94,6 +103,7 @@ const EditarProyecto = () => {
             label='fecha inicio:'
             type='date'
             name='fechaInicio'
+            hidden = {userData.rol === "LIDER"?true:userData.rol === "ADMINISTRADOR"?false:true}
             defaultValue={queryData.Proyecto.fechaInicio}
             required={false}
           />
@@ -101,12 +111,14 @@ const EditarProyecto = () => {
             label='fecha fin:'
             type='date'
             name='fechaFin'
+            hidden = {userData.rol === "LIDER"?true:userData.rol === "ADMINISTRADOR"?false:true}
             defaultValue={queryData.Proyecto.fechaFin}
             required={false}
           />
           <DropDown
             label='Fase del proyecto:'
             name='fase'
+            hidden = {userData.rol === "LIDER"?true:userData.rol === "ADMINISTRADOR"?false:true}
             defaultValue={queryData.Proyecto.fase}
             required={true}
             options={Enum_FaseProyecto}
@@ -114,6 +126,7 @@ const EditarProyecto = () => {
             <DropDown
             label='Estado del proyecto:'
             name='estado'
+            hidden = {userData.rol === "LIDER"?true:userData.rol === "ADMINISTRADOR"?false:true}
             defaultValue={queryData.Proyecto.estado}
             required={true}
             options={Enum_EstadoProyecto}
@@ -125,6 +138,9 @@ const EditarProyecto = () => {
           />
         </form>
       </div>
+      </div>
+      </PrivateRoute>
+
     );
   };
   
