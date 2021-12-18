@@ -60,7 +60,7 @@ const Redirigir = ({ withLink, irA, lugar }) => {
 const Logout = () => {
   const { setToken } = useAuth();
   const deleteToken = () => {
-    console.log('eliminar token');
+    console.log("eliminar token");
     setToken(null);
     window.location.reload(true);
   };
