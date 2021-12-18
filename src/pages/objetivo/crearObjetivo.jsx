@@ -10,6 +10,7 @@ import { GET_OBJETIVOS } from "graphql/objetivos/queries";
 import ButtonLoading from 'components/ButtonLoading';
 import DropDown from 'components/Dropdown';
 import Input from 'components/Input';
+import PrivateRoute from "components/PrivateRoute";
 
 const CrearObjetivo = () => {
     const navigate = useNavigate();
@@ -43,8 +44,9 @@ const CrearObjetivo = () => {
     
        
     }, [dataMutation]);
-
     return (
+    <PrivateRoute roleList={["LIDER","ADMINISTRADOR",]}>
+
         <div className='flex flex-col w-full h-full items-center justify-center p-10'>
             <div className='self-start'>
             <Link to={`/proyectos/${_id}`}>
@@ -72,6 +74,8 @@ const CrearObjetivo = () => {
                 />            
           </form>
         </div>
+      </PrivateRoute>
+
     )
 }
 
