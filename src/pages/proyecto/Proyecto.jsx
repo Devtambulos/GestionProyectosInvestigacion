@@ -7,6 +7,7 @@ import ReactLoading from 'react-loading';
 import { GET_OBJETIVOS } from "graphql/objetivos/queries";
 import { GET_AVANCES } from "graphql/avances/queries";
 import { Enum_TipoObjetivo } from "../../utils/enums"
+import Inscripcio from "pages/inscripcion/Index";
 
 const Proyecto = () => {
   const { _id } = useParams();
@@ -193,6 +194,7 @@ const Proyecto = () => {
         <h1 className='p-2 m-4 text-3xl font-serif text-gray-800 font-bold text-center w-full justify-center'>
           Inscripciones
         </h1>
+        <Inscripcio id={_id}/>
       </div>
 
     </div>

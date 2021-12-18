@@ -2,14 +2,11 @@ import { gql } from '@apollo/client';
 
 const CREAR_INSCRIPCION = gql`
 mutation CrearInscripcion(
-    $estado: Enum_EstadoInscripcion
     $proyecto: String!
     $estudiante: String!
   ) {
-    crearInscripcion(estado: $estado, proyecto: $proyecto, estudiante: $estudiante) {
-      estado
-      proyecto
-      estudiante
+    crearInscripcion(proyecto: $proyecto, estudiante: $estudiante) {
+      _id
     }
   }
 `;
@@ -19,7 +16,15 @@ mutation AprobarInscripcion(
     $_id: String!
   ) {
     aprobarInscripcion(_id: $_id) {
-      _id
+    }
+  }
+`;
+
+const RECHAZAR_INSCRIPCION = gql`
+mutation RechazarInscripcion(
+    $_id: String!
+  ) {
+    rechazarInscripcion(_id: $_id) {
     }
   }
 `;
@@ -44,4 +49,4 @@ mutation EliminarInscripcion(
   }
 `;
 
-export {CREAR_INSCRIPCION, APROBAR_INSCRIPCION, TERMINAR_INSCRIPCION, ELIMINAR_INSCRIPCION};
+export {CREAR_INSCRIPCION, APROBAR_INSCRIPCION,RECHAZAR_INSCRIPCION, TERMINAR_INSCRIPCION, ELIMINAR_INSCRIPCION};

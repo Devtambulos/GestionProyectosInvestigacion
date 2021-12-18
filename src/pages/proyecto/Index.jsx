@@ -26,7 +26,7 @@ const IndexProyecto = () => {
   
   const {data: dataI} = useQuery(GET_INSCRIPCIONES);
 
-  const [crearInscripcion, {data: dataC, error: errorC, loading: loadingC}] = useMutation(CREAR_INSCRIPCION);
+  const [crearInscripcion, {error: errorC}] = useMutation(CREAR_INSCRIPCION);
 
   useEffect(() => {
     if (error) {
@@ -36,7 +36,6 @@ const IndexProyecto = () => {
 
   useEffect(() => {
     if (errorC) {
-      console.log(errorC)
       toast.error("Error consultando los proyectos");
     }
   }, [errorC]);
@@ -50,35 +49,30 @@ const IndexProyecto = () => {
     );
 
   const Comprobar = (proyectoId) => {
-    let estado = false;
-    let proyecto = false;
+    let state = false;
+    let project = false;
 
     dataI.Inscripciones.map((i)=>{
       if(_id === i.estudiante._id){
-        estado = true;
+        state = true;
       }
     });
 
     dataI.Inscripciones.map((i)=>{
       if(proyectoId === i.proyecto._id){
-        proyecto = true;
+        project = true;
       }
     });
 
-    if(estado && proyecto){
-      toast.error("Ya estás inscrito en este proyecto");
+    if(state && project){
+      toast.success("Ya estás inscrito en este proyecto");
     }else{
       crearInscripcion({
         variables: {
           proyecto: proyectoId,
-          estudiante: _id,
+          estudiante: userData._id,
         },
       });
-      if(loadingC){
-        toast.error("Estácargando");
-      }else if(errorC){
-        toast.error("No estás inscrito en este proyecto");
-      }
     }
   }    
     
