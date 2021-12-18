@@ -8,8 +8,12 @@ import { GET_OBJETIVOS } from "graphql/objetivos/queries";
 import { GET_AVANCES } from "graphql/avances/queries";
 import { Enum_TipoObjetivo } from "../../utils/enums"
 import PrivateComponent from "components/PrivateComponent";
+import { useUser } from 'context/userContext';
+
 
 const Proyecto = () => {
+  const { userData, setUserData } = useUser();
+  console.log(userData);
   const { _id } = useParams();
   // QUERY PROYECTO
   const {
@@ -76,8 +80,6 @@ const Proyecto = () => {
                         p-1 px-2 hover:bg-green-100 rounded-full' />
           </Link>
 
-          <i className="fas fa-trash-alt text-red-400 hover:bg-red-100 rounded-full 
-      cursor-pointer hover:text-red-600 px-2 p-1"></i>
         </div>
       </div>
 
@@ -95,11 +97,12 @@ const Proyecto = () => {
       ESTADO: {dataProyecto.Proyecto.estado}
       {/* OBJETIVOS DEL PROYECTO*/}
       <div>
-        {/* <PrivateRoute roleList={["LIDER","ADMINISTRADOR",]}> */}
         <div className="p-8 items-center font-serif text-gray-800">
           <div className='p-2 m-4 text-3xl font-serif text-gray-800 font-bold text-center flex flex-col w-full'>            Objetivos
             <div className="my-2 self-end">
-              <Link to={`/proyectos/${dataProyecto.Proyecto._id}/objetivo`}>
+              <Link 
+              hidden = {userData.rol === "LIDER"?false:true}              
+              to={`/proyectos/${dataProyecto.Proyecto._id}/objetivo`}>
                 <i className='fas fa-plus-circle text-purple-700 hover:text-green-600 cursor-pointer
                         p-1 px-2 hover:bg-green-100 rounded-full' />
               </Link>
@@ -110,7 +113,9 @@ const Proyecto = () => {
               <tr>
                 <th>DESCRIPCION</th>
                 <th>TIPO</th>
-                <th className="w-10">EDITAR</th>
+                <th
+                hidden = {userData.rol === "LIDER"?false:true}
+                className="w-10">EDITAR</th>
               </tr>
             </thead>
             <tbody>
@@ -124,15 +129,12 @@ const Proyecto = () => {
                       <td className="text-center">
                         {Enum_TipoObjetivo[u.tipo]}</td>
                       <td className="flex items-center justify-center">
-                        <Link
+                        <Link 
+                          hidden = {userData.rol === "LIDER"?false:true}
                           to={`/proyectos/editar/objetivo${u._id}`}>
                           <i className='fas fa-pen text-green-400 hover:text-green-600 cursor-pointer
                         p-1 px-2 hover:bg-green-100 rounded-full' />
                         </Link>
-
-                        <i
-                          className="fas fa-trash-alt text-red-400 hover:bg-red-100 rounded-full 
-                      cursor-pointer hover:text-red-600 px-2 p-1"></i>
                       </td>
                     </tr>
                   );
@@ -140,7 +142,6 @@ const Proyecto = () => {
             </tbody>
           </table>
         </div>
-        {/* </PrivateRoute> */}
       </div>
       {/* AVANCES DEL PROYECTO */}
       <div className="p-10 flex flex-col">
@@ -183,10 +184,6 @@ const Proyecto = () => {
                         <i className='fas fa-pen text-green-400 hover:text-green-600 cursor-pointer
                         p-1 px-2 hover:bg-green-100 rounded-full' />
                       </Link>
-
-                      <i
-                        className="fas fa-trash-alt text-red-400 hover:bg-red-100 rounded-full 
-                      cursor-pointer hover:text-red-600 px-2 p-1"></i>
                     </td>
                   </tr>
                 );
