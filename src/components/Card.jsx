@@ -48,6 +48,46 @@ export default function Card(props) {
   );
 }
 
+export function CardStudent(props) {
+  return (
+    <>
+        <div key={props.Key} className="cursor-pointer shadow-DropDown rounded-xl p-4 w-full">
+          
+      <Link to={`/proyectos/${props.Key}`}>
+          <div
+            className="relative w-full rounded-lg p-1 bg-cover bg-no-repeat"
+            style={{
+              backgroundImage: `url(${"https://es.unesco.org/youth/toptips/user/pages/images/home-feature-two_mobile.png"})`,
+            }}
+          >
+            <img className="h-52 rounded-lg object-cover" alt="" src={""}></img>
+          </div>
+          <h3 className="pt-2">{props.nombre}</h3>
+          <div className="w-full py-2 text-gray text-sm h2 w-full flex items-center">
+            <IconFlag className="fill-current text-indigo-800 h-5 w-5 mr-1" />
+            <p className="text-indigo-800">Lider</p>
+            <p>: {props.lider}</p>
+          </div>
+          <div className="py-2 text-gray text-sm h2 w-full flex items-center">
+            <IconCheckOn className="fill-current text-indigo-800 h-5 w-5 mr-1" />
+            <p className="text-indigo-800">Estado</p>
+            <p>: {props.estado}</p>
+          </div>
+          <div className="py-2 text-gray text-sm w-full flex items-center">
+            <IconInfo className="fill-current text-indigo-800 h-5 w-5 mr-1" />
+            <p className="text-indigo-800">Fase</p>
+            <p>: {props.fase}</p>
+          </div>
+          
+      </Link>
+          <div className="bottom-0 hover:bg-indigo-400 justify-center rounded-lg bg-indigo-800 py-2 text-gray text-sm w-full flex items-center">
+            <button className="h-full w-full text-center text-white" onClick={props.onClick}>Inscribir{props.inscrito}</button>
+          </div>
+        </div>
+    </>
+  );
+}
+
 export function CardNew() {
   return(<>
     <Link to={`/proyectos/crear`}>
