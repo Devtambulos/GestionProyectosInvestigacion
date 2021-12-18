@@ -1,9 +1,9 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import imgHeader from "../../images/2.svg";
-import { datosInfoEmpresa } from "../../utils/inicio/datosEmpresa.js";
-import { datosDevs } from "utils/inicio/datosDevs";
-import "../../styles/inicio.css";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import imgHeader from '../../images/2.svg';
+import { datosInfoEmpresa } from '../../utils/inicio/datosEmpresa.js';
+import { datosDevs } from 'utils/inicio/datosDevs';
+import '../../styles/inicio.css';
 
 const PaginaInicial = () => {
   return (
@@ -29,7 +29,7 @@ const Redirigir = ({ irA, text }) => {
   return (
     <button className={`mx-5 sm:mx-0 md:m-5 sm:px-3`}>
       <Link
-        className={`px-5 py-3 bg-indigo-700 rounded-md text-white hover:bg-indigo-500 hover:text-white font-semibold  `}
+        className={`px-3 py-2 bg-indigo-700 rounded-md text-white hover:bg-indigo-500 hover:text-white font-semibold  `}
         to={irA}
       >
         {text}
@@ -44,9 +44,9 @@ const NavBar = () => {
       <div className="px-7 md:p-0">
         <Logo />
       </div>
-      <div className="px-7 py-4 md:p-0">
-        <Redirigir irA={"/auth/register"} text={"Registro"} />
-        <Redirigir irA={"/auth/login"} text={"Login"} />
+      <div className="px-6 py-3 md:p-0">
+        <Redirigir irA={'/auth/register'} text={'Registro'} />
+        <Redirigir irA={'/auth/login'} text={'Login'} />
       </div>
     </div>
   );
@@ -58,13 +58,13 @@ const Header = () => {
       <header className="grid grid-cols-1 md:grid-cols-2">
         <div className="col-span-1 flex flex-wrap justify-center items-center p-5 md:row-span-1 ">
           <h1 className="font-bold text-3xl p-1 w-full text-center md:text-5xl">
-            DevProject es el lugar indicado donde podras gestionar tus proyectos
+            DevProject es el lugar indicado donde podrás gestionar tus proyectos
           </h1>
           <p className="text-2xl  textTitulo w-full text-center p-5">
             ¡Facil y gratis!
           </p>
 
-          <Redirigir irA={"/auth/register"} text={"Empezar"} />
+          <Redirigir irA={'/auth/register'} text={'Empezar'} />
         </div>
         <figure className="flex justify-center items-center md:col-span-1 p-5">
           <img className="" src={imgHeader} alt="imgHeader" />
@@ -103,7 +103,7 @@ const Section = () => {
             {section.textFirst ? (
               <>
                 <div>
-                  <h2 className="text-center font-bold text-3xl uppercase">
+                  <h2 className="text-center font-bold text-3xl uppercase ">
                     {section.titulo}
                   </h2>
                   <p className="font-semibold text-xl">{section.parrafo}</p>
@@ -191,7 +191,7 @@ const Footer = () => {
   return (
     <div className="bg-gray-900 flex flex-wrap w-full px-8 py-4 items-center justify-center sm:justify-between">
       <p className="px-5 md:p-0 text-white">
-        Hecho con <i className="fas fa-heart" /> y{" "}
+        Hecho con <i className="fas fa-heart" /> y{' '}
         <i className="fa fa-battery-full" /> desde Colombia
       </p>
       <a
@@ -202,8 +202,8 @@ const Footer = () => {
       >
         <div className="border-b border-solid border-white hover:border-indigo-400 ">
           <span className="text-white hover:text-indigo-400">
-            {" "}
-            DevTambulos <i className="fa fa-github " />{" "}
+            {' '}
+            DevTambulos <i className="fa fa-github " />{' '}
           </span>
         </div>
       </a>
