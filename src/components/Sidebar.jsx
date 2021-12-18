@@ -86,8 +86,8 @@ const Logo = () => {
     <div className="py-3 w-full flex flex-col items-center justify-center">
        
       <img src="DevProject_logo.png" alt="Logo" className="h-16" />
-      <span className="mt-10 my-2 text-xl font-bold text-center"> {userData.nombre}  {userData.apellido} </span>
-      <span className="my-2 text-base font-bold text-center"> {userData.rol} </span>
+      <span className="mt-6 py-1 text-xl font-bold text-center"> {userData.nombre}  {userData.apellido} </span>
+      <span className="py-1 text-base font-bold text-center"> {userData.rol} </span>
     </div>
   );
 };
