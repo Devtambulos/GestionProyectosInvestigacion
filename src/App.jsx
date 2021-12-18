@@ -102,6 +102,7 @@ function App() {
                 <Route path="/perfil" element={<Perfil />} />
                 <Route path="proyectos" element={<IndexProyecto/>} />
                 <Route path="/proyectos/:_id" element={<Proyecto />} />
+                <Route path="/proyectos/inscripcion/:_id" element={<EstadoInscripcion />} />
                 <Route path="/proyectos/:_id/avance" element={<CrearAvance />}/>
                 <Route path="/proyectos/:_id/objetivo" element={<CrearObjetivo/>}/>
                 <Route path="/proyectos/crear/" element={<ProyectoNuevo />} />

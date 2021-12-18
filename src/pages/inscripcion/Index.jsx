@@ -66,7 +66,7 @@ const Inscripcio = (props) => {
                         <td>{nombre[0].apellido}</td>
                         <td>{u.estado}</td>
                         <td>
-                          <Link to={`/proyectos/inscripcion/${idP}`}>
+                          <Link to={`/proyectos/inscripcion/${u._id}`}>
                             <i
                               className="fas fa-pen text-green-400 hover:text-green-600 cursor-pointer
                           p-2 hover:bg-green-100 rounded-full"
