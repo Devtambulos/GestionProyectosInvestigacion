@@ -1,13 +1,13 @@
-import React from "react";
-import { useUser } from "context/userContext";
-import { Link } from "react-router-dom";
-import { useAuth } from "context/authContext";
-import ".././styles/privateRoute.css";
+import React from 'react';
+import { useUser } from 'context/userContext';
+import { Link } from 'react-router-dom';
+import { useAuth } from 'context/authContext';
+import '.././styles/privateRoute.css';
 
 const PrivateRoute = ({ roleList, authConfirm, children }) => {
   const { userData } = useUser();
 
-  if (roleList.includes(userData.rol) && userData.estado === "AUTORIZADO") {
+  if (roleList.includes(userData.rol) && userData.estado === 'AUTORIZADO') {
     return children;
   }
 
@@ -19,13 +19,14 @@ const PrivateRoute = ({ roleList, authConfirm, children }) => {
       <p className="font-bold text-2xl text-center">
         No tienes los permisos necesarios para ingresar a este sitio, si crees
         que se trata de un error comunicate con un administrador o en la parte
-        de abajo podras encontrar algunos links que pueden ser de tu interes:
+        de abajo podrás encontrar algunos links que pueden ser de tu interes:
       </p>
       <div className="containerLinks">
-        <Redirigir withLink={true} lugar={"Ir a perfil"} irA={"/"} />
+        <Redirigir withLink={true} lugar={'Ir al inicio'} irA={'/'} />
+        <Redirigir withLink={true} lugar={'Ir a perfil'} irA={'/perfil'} />
         <Redirigir
           withLink={false}
-          lugar={"Recargar página"}
+          lugar={'Recargar página'}
           irA={window.location}
         />
         <Logout />
@@ -59,7 +60,7 @@ const Redirigir = ({ withLink, irA, lugar }) => {
 const Logout = () => {
   const { setToken } = useAuth();
   const deleteToken = () => {
-    console.log("eliminar token");
+    console.log('eliminar token');
     setToken(null);
     window.location.reload(true);
   };
