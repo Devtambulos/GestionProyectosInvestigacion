@@ -40,7 +40,7 @@ const Inscripcio = (props) => {
   }
 
   return (
-    <PrivateRoute roleList={["LIDER", "ADMINISTRADOR"]}>
+    <PrivateRoute roleList={["LIDER", "ADMINISTRADOR","ESTUDIANTE"]}>
       <div className="items-center font-serif text-gray-800">
         <div className="p-8 items-center font-serif text-gray-800">
           <table className="tabla ">
@@ -83,7 +83,7 @@ const Inscripcio = (props) => {
           </table>
         </div>
       </div>
-    </PrivateRoute>
+     </PrivateRoute>
   );
 };
 
