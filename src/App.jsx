@@ -30,6 +30,7 @@ import EditarObjetivos from "pages/objetivo/EditarObjetivo";
 import EditarAvance from "pages/avances/editarAvance";
 import CrearAvance from "pages/avances/crearAvance";
 import CrearObjetivo from "pages/objetivo/crearObjetivo";
+import EstadoInscripcion from "pages/inscripcion/Estado";
 
 const httpLink = createHttpLink({
   uri: "http://localhost:4000/graphql",
