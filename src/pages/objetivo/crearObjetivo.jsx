@@ -10,6 +10,7 @@ import { GET_OBJETIVOS } from "graphql/objetivos/queries";
 import ButtonLoading from 'components/ButtonLoading';
 import DropDown from 'components/Dropdown';
 import Input from 'components/Input';
+import PrivateRoute from "components/PrivateRoute";
 
 const CrearObjetivo = () => {
     const navigate = useNavigate();
@@ -30,19 +31,22 @@ const CrearObjetivo = () => {
         crearObjetivo({
           variables: { ...formData, proyecto:_id },
         });
+        if(dataMutation){
+        toast.success('Objetivo creado correctamente');};
+        window.location.href=`/proyectos/${_id}`
       };
       
 
     useEffect(() => {
+      if(dataMutation){
+        toast.success('Objetivo creado correctamente');};
         console.log("Data mutation", dataMutation);
     
-      if (dataMutation) {
-        toast.success('Objetivo creado correctamente');
-        navigate(`/proyectos/${_id}`);
-      }
+       
     }, [dataMutation]);
-
     return (
+    <PrivateRoute roleList={["LIDER","ADMINISTRADOR",]}>
+
         <div className='flex flex-col w-full h-full items-center justify-center p-10'>
             <div className='self-start'>
             <Link to={`/proyectos/${_id}`}>
@@ -70,6 +74,8 @@ const CrearObjetivo = () => {
                 />            
           </form>
         </div>
+      </PrivateRoute>
+
     )
 }
 

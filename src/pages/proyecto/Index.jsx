@@ -46,7 +46,7 @@ const IndexProyecto = () => {
               <Card
                 Key={proyecto._id}
                 nombre={proyecto.nombre}
-                lider={proyecto.lider?proyecto.lider.nombre:""}
+                lider={proyecto.lider?proyecto.lider.nombre + " " + proyecto.lider.apellido :""}
                 estado={proyecto.estado}
                 fase={proyecto.fase}
               />

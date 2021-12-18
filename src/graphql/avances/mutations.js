@@ -17,8 +17,8 @@ mutation crearAvance(
 `;
 
 const EDITAR_AVANCE = gql`
-mutation EditarAvance($_id: String!, $descripcion: String) {
-  editarAvance(_id: $_id, descripcion: $descripcion) {
+mutation EditarAvance($_id: String!, $descripcion: String, $observaciones: String) {
+  editarAvance(_id: $_id, descripcion: $descripcion, observaciones: $observaciones) {
     _id
     fecha
     descripcion
@@ -27,5 +27,12 @@ mutation EditarAvance($_id: String!, $descripcion: String) {
 }
 `;
 
+const ELIMINAR_AVANCE = gql`
+mutation EliminarAvance($_id: String!) {
+  eliminarAvance(_id: $_id) {
+    _id
+  }
+}
+`;
 
-export { CREAR_AVANCE, EDITAR_AVANCE };
+export { CREAR_AVANCE, EDITAR_AVANCE, ELIMINAR_AVANCE };

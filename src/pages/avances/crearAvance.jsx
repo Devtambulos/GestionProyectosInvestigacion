@@ -29,12 +29,15 @@ const CrearAvance = () => {
         crearAvance({
             variables: { ...formData, proyecto: _id, creadoPor: userData._id },
         });
+        if(dataMutation){
+            toast.success('Avance creado correctamente');};
+          window.location.href=`/proyectos/${_id}`
+
     };
 
     useEffect(() => {
         if (dataMutation) {
-            toast.success('Avance creado con éxito');
-            //navigate(`/proyectos/${_id}`);
+            toast.success('Avance creado con éxito');            
         }
         if (errorMutation){
             toast.error('Error modificando el avance');
@@ -51,7 +54,8 @@ const CrearAvance = () => {
             <h1 className='m-4 text-3xl text-gray-800 font-bold text-center'>Crear Nuevo Avance</h1>
             <form ref={form} onChange={updateFormData} onSubmit={submitForm} className='flex flex-col items-center justify-center'>
                 <Input name='fecha' label='Fecha creación' defaultValue={`${fecha.toISOString().split('T')[0]}`} required={true} type='date' />
-                <Input name='descripcion' label='Descripción' required={true} type='text' />
+                <label> Descripción</label>
+                <textarea type='text' name='descripcion' required={true} className="input w-full "/>
                 <ButtonLoading text='Crear Avance' loading={loadingMutation} disabled={Object.keys(formData).length === 0} />
             </form>
         </div>
