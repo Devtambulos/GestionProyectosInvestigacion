@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { GET_PROYECTO } from 'graphql/proyectos/queries';
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import { toast } from 'react-toastify';
+import { Tooltip } from "@material-ui/core";
 import ReactLoading from 'react-loading';
 import { GET_OBJETIVOS } from "graphql/objetivos/queries";
 import { GET_AVANCES } from "graphql/avances/queries";
@@ -82,7 +83,7 @@ const Proyecto = () => {
       </div>
 
 
-      LIDER: {dataProyecto.Proyecto.lider ? dataProyecto.Proyecto.lider.nombre : ""}
+      LIDER: {dataProyecto.Proyecto.lider ? dataProyecto.Proyecto.lider.nombre + " " + dataProyecto.Proyecto.lider.apellido : ""}
       <br />
       PRESUPUESTO: {dataProyecto.Proyecto.presupuesto}
       <br />
@@ -147,52 +148,55 @@ const Proyecto = () => {
         <div className='p-2 m-4 text-3xl font-serif text-gray-800 font-bold text-center flex flex-col w-full'>
           Avances
           <PrivateComponent roleList={["ESTUDIANTE", "ADMINISTRADOR"]}>
-            <div className="my-2 self-end">
-              <Link to={`/proyectos/${dataProyecto.Proyecto._id}/avance`}>
-                <i className='fas fa-plus-circle text-purple-700 hover:text-green-600 cursor-pointer
+            <Tooltip title="Crear Avance" arrow>
+              <div className="my-2 self-end">
+                <Link to={`/proyectos/${dataProyecto.Proyecto._id}/avance`}>
+                  <i className='fas fa-plus-circle text-purple-700 hover:text-green-600 cursor-pointer
                         p-1 px-2 hover:bg-green-100 rounded-full' />
-              </Link>
-            </div>
+                </Link>
+              </div>
+            </Tooltip>
           </PrivateComponent>
         </div>
-        <table className='tabla '>
-          <thead>
-            <tr>
-              <th>FECHA</th>
-              <th>DESCRIPCIÓN</th>
-              <th>OBSERVACIONES</th>
-              <th className="w-10">EDITAR</th>
-            </tr>
-          </thead>
-          <tbody>
-            {dataAvances &&
-              dataAvances.filtrarAvance.map((a) => {
+        {dataAvances.filtrarAvance.length === 0 ? (<span className=" text-center ">No se tienen avances en este proyecto</span>
+        ) : (
+          <table className='tabla '>
+            <thead>
+              <tr>
+                <th>FECHA</th>
+                <th>DESCRIPCIÓN</th>
+                <th>OBSERVACIONES</th>
+                <th className="w-10">EDITAR</th>
+              </tr>
+            </thead>
+            <tbody>
+              {dataAvances &&
+                dataAvances.filtrarAvance.map((a) => {
 
-                return (
-                  <tr key={a._id}>
-                    <td className="text-center">
-                      {a.fecha}</td>
-                    <td className="text-center">
-                      {a.descripcion}
-                    </td>
-                    <td className="text-center">
-                      {a.observaciones}</td>
-                    <td className="flex items-center justify-center">
-                      <Link
-                        to={`/proyectos/editar/avance${a._id}`}>
-                        <i className='fas fa-pen text-green-400 hover:text-green-600 cursor-pointer
+                  return (
+                    <tr key={a._id}>
+                      <td className="text-center">
+                        {a.fecha}</td>
+                      <td className="text-center">
+                        {a.descripcion}
+                      </td>
+                      <td className="text-center">
+                        {a.observaciones}</td>
+                      <td className="flex items-center justify-center">
+                        <Tooltip title="Editar Avance" arrow>
+                          <Link
+                            to={`/proyectos/editar/avance${a._id}`}>
+                            <i className='fas fa-pen text-green-400 hover:text-green-600 cursor-pointer
                         p-1 px-2 hover:bg-green-100 rounded-full' />
-                      </Link>
-
-                      <i
-                        className="fas fa-trash-alt text-red-400 hover:bg-red-100 rounded-full 
-                      cursor-pointer hover:text-red-600 px-2 p-1"></i>
-                    </td>
-                  </tr>
-                );
-              })}
-          </tbody>
-        </table>
+                          </Link>
+                        </Tooltip>
+                      </td>
+                    </tr>
+                  );
+                })}
+            </tbody>
+          </table>
+        )}
       </div>
       {/* INSCRIOCIONES DEL PROYECTO */}
       <div>
@@ -200,7 +204,6 @@ const Proyecto = () => {
           Inscripciones
         </h1>
       </div>
-
     </div>
 
   );

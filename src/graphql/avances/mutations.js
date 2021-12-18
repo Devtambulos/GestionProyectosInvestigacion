@@ -27,5 +27,12 @@ mutation EditarAvance($_id: String!, $descripcion: String, $observaciones: Strin
 }
 `;
 
+const ELIMINAR_AVANCE = gql`
+mutation EliminarAvance($_id: String!) {
+  eliminarAvance(_id: $_id) {
+    _id
+  }
+}
+`;
 
-export { CREAR_AVANCE, EDITAR_AVANCE };
+export { CREAR_AVANCE, EDITAR_AVANCE, ELIMINAR_AVANCE };

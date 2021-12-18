@@ -2,13 +2,13 @@ import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import useFormData from 'hooks/useFormData';
 import { GET_AVANCE } from 'graphql/avances/queries';
+import { GET_AVANCES } from 'graphql/avances/queries';
 import { useQuery, useMutation } from '@apollo/client';
 import { EDITAR_AVANCE } from 'graphql/avances/mutations';
 import { toast } from 'react-toastify';
 import Input from 'components/Input';
 import ButtonLoading from 'components/ButtonLoading';
 import { useUser } from 'context/userContext';
-import { Hidden } from '@material-ui/core';
 import PrivateComponent from 'components/PrivateComponent';
 
 
@@ -29,13 +29,17 @@ const EditarAvance = () => {
     data: mutationData,
     loading: mutationLoading,
     error: mutationError }] =
-    useMutation(EDITAR_AVANCE);
+    useMutation(EDITAR_AVANCE, { refetchQueries: [GET_AVANCES] });
 
   const submitForm = (e) => {
     e.preventDefault();
     editarAvance({
       variables: { _id, ...formData },
     });
+    if (mutationData) {
+      toast.success('Avance modificado correctamente');
+    };
+    window.location.href = `/proyectos/${queryData.avance.proyecto._id}`
   };
 
   useEffect(() => {
@@ -58,21 +62,21 @@ const EditarAvance = () => {
       <Link to={`/proyectos/${queryData.avance.proyecto._id}`}>
         <i className='fas fa-arrow-left text-gray-600 cursor-pointer font-bold text-xl hover:text-gray-900' />
       </Link>
-      <h1 className='m-4 text-3xl text-gray-800 font-bold text-center'>Editar Avance</h1>
+
       <form onSubmit={submitForm} onChange={updateFormData} ref={form}
         className='flex flex-col items-center justify-center'>
         <PrivateComponent roleList={["ESTUDIANTE"]}>
-          <Input
-            label='Descripción Avance:' type='text' name='descripcion'
+          <h1 className='m-4 text-3xl text-gray-800 font-bold text-center'>Editar Descripción</h1>
+
+          <textarea label='Descripción Avance:' type='text' name='descripcion' className="input w-full "
             defaultValue={queryData.avance.descripcion}
-            required={userData.rol === "ESTUDIANTE" ? true : false}
           />
         </PrivateComponent>
         <PrivateComponent roleList={["LIDER"]}>
-          <Input
-            label='Observaciones:' type='text' name='observaciones'
+          <h1 className='m-4 text-3xl text-gray-800 font-bold text-center'>Editar Observación</h1>
+
+          <textarea label='Observaciones:' type='text' name='observaciones' className="input w-full "
             defaultValue={queryData.avance.observaciones}
-            required={userData.rol === "LIDER" ? true : false}
           />
         </PrivateComponent>
         <ButtonLoading

@@ -54,7 +54,8 @@ const CrearAvance = () => {
             <h1 className='m-4 text-3xl text-gray-800 font-bold text-center'>Crear Nuevo Avance</h1>
             <form ref={form} onChange={updateFormData} onSubmit={submitForm} className='flex flex-col items-center justify-center'>
                 <Input name='fecha' label='Fecha creación' defaultValue={`${fecha.toISOString().split('T')[0]}`} required={true} type='date' />
-                <Input name='descripcion' label='Descripción' required={true} type='text' />
+                <label> Descripción</label>
+                <textarea type='text' name='descripcion' required={true} className="input w-full "/>
                 <ButtonLoading text='Crear Avance' loading={loadingMutation} disabled={Object.keys(formData).length === 0} />
             </form>
         </div>
