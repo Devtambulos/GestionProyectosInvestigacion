@@ -47,33 +47,34 @@ const IndexProyecto = () => {
       </div>
     );
 
-  const Comprobar = (proyectoId) => {
-    let state = false;
-    let project = false;
+  // const Comprobar = (proyectoId) => {
+  //   let state = false;
+  //   let project = false;
 
-    dataI.Inscripciones.map((i)=>{
-      if(_id === i.estudiante._id){
-        state = true;
-      }
-    });
+  //   dataI.Inscripciones.map((i)=>{
+  //     console.log("iiiii",i);
+  //     if(_id === i.estudiante._id){
+  //       state = true;
+  //     }
+  //   });
 
-    dataI.Inscripciones.map((i)=>{
-      if(proyectoId === i.proyecto._id){
-        project = true;
-      }
-    });
+  //   dataI.Inscripciones.map((i)=>{
+  //     if(proyectoId === i.proyecto._id){
+  //       project = true;
+  //     }
+  //   });
 
-    if(state && project){
-      toast.success("Ya estás inscrito en este proyecto");
-    }else{
-      crearInscripcion({
-        variables: {
-          proyecto: proyectoId,
-          estudiante: userData._id,
-        },
-      });
-    }
-  }    
+  //   if(state && project){
+  //     toast.success("Ya estás inscrito en este proyecto");
+  //   }else{
+  //     crearInscripcion({
+  //       variables: {
+  //         proyecto: proyectoId,
+  //         estudiante: userData._id,
+  //       },
+  //     });
+  //   }
+  // }    
     
 
   return (
@@ -99,6 +100,10 @@ const IndexProyecto = () => {
           </PrivateComponent> */}
           <PrivateComponent roleList={["LIDER", "ADMINISTRADOR","ESTUDIANTE"]}>
             {data && data.Proyectos.map((proyecto) => {
+              console.log("PROYECTOOO",proyecto);
+              const estudianteInscrito = proyecto.inscripciones.find(estudiante => estudiante.estudiante._id == _id )
+              {estudianteInscrito?console.log("estudianteinscrito"):console.log("no está inscrito")}
+              
               return (
                 <CardStudent
                   Key={proyecto._id}
@@ -106,7 +111,8 @@ const IndexProyecto = () => {
                   lider={proyecto.lider?proyecto.lider.nombre:""}
                   estado={proyecto.estado}
                   fase={proyecto.fase}
-                  onClick={() => Comprobar(proyecto._id)}
+                  hidden = {estudianteInscrito?true:false}
+                  onClick={() => console.log("clic")}
                 />
               );
             })}

@@ -206,12 +206,15 @@ const Proyecto = () => {
         )}
       </div>
       {/* INSCRIOCIONES DEL PROYECTO */}
-      {/* {userData.rol === "ESTUDIANTE"?null:<div>
+      {/* {userData.rol === "ESTUDIANTE"?null:<div> */}
+      <PrivateComponent roleList={["LIDER", "ADMINISTRADOR"]}>
+
         <h1 className='p-2 m-4 text-3xl font-serif text-gray-800 font-bold text-center w-full justify-center'>
           Inscripciones
         </h1>
         <Inscripcio id={_id}/>
-      </div>} */}
+      </PrivateComponent>
+      {/* </div>} */}
       
     </div>
 
