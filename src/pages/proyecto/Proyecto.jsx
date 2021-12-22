@@ -34,7 +34,7 @@ const Proyecto = () => {
     data: dataObjetivos,
     error: errorObjetivos,
     loading: loadingObjetivos,
-    refetch: refetchObjetivos } = useQuery(GET_OBJETIVOS, {
+    } = useQuery(GET_OBJETIVOS, {
       variables: { _id },
       // pollInterval: 50000,
     });

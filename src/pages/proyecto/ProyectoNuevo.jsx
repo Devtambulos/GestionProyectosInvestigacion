@@ -52,7 +52,7 @@ const ProyectoNuevo = () => {
      
         useEffect(() => {
           if (mutationError) {
-            toast.error("Error consultando los proyectos");
+            toast.error("Error creando los proyectos");
           }
         }, [mutationError]);
       

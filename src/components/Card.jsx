@@ -30,7 +30,7 @@ export default function Card(props) {
               servicio o resultado único".{props.descripcion}
             </p>
           </div> */}
-          <div className="w-full py-2 text-gray text-sm h2 w-full flex items-center">
+          <div className="w-full py-2 text-gray text-sm h2 flex items-center">
             <IconFlag className="fill-current text-indigo-800 h-5 w-5 mr-1" />
             <p className="text-indigo-800">Lider</p>
             <p>: {props.lider}</p>
@@ -68,7 +68,7 @@ export function CardStudent(props) {
             <img className="h-52 rounded-lg object-cover" alt="" src={""}></img>
           </div>
           <h3 className="pt-2">{props.nombre}</h3>
-          <div className="w-full py-2 text-gray text-sm h2 w-full flex items-center">
+          <div className="w-full py-2 text-gray text-sm h2 flex items-center">
             <IconFlag className="fill-current text-indigo-800 h-5 w-5 mr-1" />
             <p className="text-indigo-800">Lider</p>
             <p>: {props.lider}</p>
