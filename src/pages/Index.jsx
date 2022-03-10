@@ -17,7 +17,9 @@ const Index = () => {
   );
 };
 
-// TODO: terminar cards de mostrar info xd
+
+
+//TODO: Centrar card para pantallas grandes 
 
 const CardInfo = () => {
   return (
