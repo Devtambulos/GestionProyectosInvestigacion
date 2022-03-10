@@ -7,12 +7,19 @@ import { Link } from "react-router-dom";
 import "styles/tabla.css";
 import PrivateRoute from "components/PrivateRoute";
 import ReactLoading from "react-loading";
+import { useUser } from 'context/userContext';
+
 
 const Inscripcio = (props) => {
 
-  const { data, error, loading } = useQuery(GET_INSCRIPCIONES);
-  const { data: dataUser, error: errorUser, loading: load } = useQuery(GET_USUARIOS);
+  const { userData, setUserData } = useUser();
 
+
+  const { data, error, loading } = useQuery(GET_INSCRIPCIONES);
+  
+  const { data: dataUser, error: errorUser, loading: load } = useQuery(GET_USUARIOS);
+  console.log("usuarios",dataUser);
+  
   useEffect(() => {
     if (error) {
       toast.error("Error consultando los usuarios inscritos");
@@ -25,7 +32,7 @@ const Inscripcio = (props) => {
     }
   }, [errorUser]);
 
-  //para ver la ruedita mientras carga la info de usuarios
+  // para ver la ruedita mientras carga la info de usuarios
   if (load) {
     return (
       <div className="flex justify-center items-center w-full h-full">
@@ -59,6 +66,7 @@ const Inscripcio = (props) => {
                   const idEstudiante = u.estudiante._id;  
                   const idProyecto = u.proyecto._id;
                   const nombre = dataUser.Usuarios.filter(e => e._id === idEstudiante)
+                  console.log("filter",nombre);
                   if (idProyecto === idP){
                     return (
                       <tr key={nombre[0]._id} className="text-center">

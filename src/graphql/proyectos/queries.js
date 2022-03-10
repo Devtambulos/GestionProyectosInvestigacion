@@ -27,13 +27,13 @@ query Query {
         descripcion
         observaciones
       }
-      inscripciones{
-        _id
+      inscripciones {
         estudiante {
-            _id
-          }
-        
-      }
+          _id
+        }
+        _id
+      }      
+      
     }
   }
 `;

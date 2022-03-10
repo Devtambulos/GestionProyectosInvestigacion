@@ -24,8 +24,10 @@ const IndexProyecto = () => {
 
   const { data, error, loading } = useQuery(GET_PROYECTOS);
   console.log("proyectos",data);
-  const {data: dataI} = useQuery(GET_INSCRIPCIONES);
-  const [crearInscripcion, {error: errorC}] = useMutation(CREAR_INSCRIPCION);
+  // const {data: dataI} = useQuery(GET_INSCRIPCIONES);
+  const [crearInscripcion, {data: dataC, error: errorC}] = useMutation(CREAR_INSCRIPCION,{
+    refetchQueries: [GET_PROYECTOS]
+  });
 
   useEffect(() => {
     if (error) {
@@ -33,11 +35,14 @@ const IndexProyecto = () => {
     }
   }, [error]);
 
-  useEffect(() => {
-    if (errorC) {
-      toast.error("Error consultando los proyectos");
+  useEffect(()=>{
+    if(dataC){
+      toast.success('Inscripción creada');
     }
-  }, [errorC]);
+    else if(errorC){
+      toast.error('Error creando inscripción');
+    };
+  },[dataC, errorC]);  
 
   //para ver la ruedita mientras carga la info de usuarios
   if (loading)
@@ -47,34 +52,23 @@ const IndexProyecto = () => {
       </div>
     );
 
-  const Comprobar = (proyectoId) => {
-    let state = false;
-    let project = false;
-
-    dataI.Inscripciones.map((i)=>{
-      if(_id === i.estudiante._id){
-        state = true;
-      }
-    });
-
-    dataI.Inscripciones.map((i)=>{
-      if(proyectoId === i.proyecto._id){
-        project = true;
-      }
-    });
-
-    if(state && project){
-      toast.success("Ya estás inscrito en este proyecto");
-    }else{
-      crearInscripcion({
-        variables: {
-          proyecto: proyectoId,
-          estudiante: userData._id,
-        },
-      });
-    }
-  }    
     
+  const Comprobar = (proyecto) => {
+    //Se asegura que el estudiante no esté inscrito antes de hacer la inscripción
+  const estudianteInscrito = proyecto.inscripciones.find(estudiante => estudiante.estudiante._id == _id )
+  if(estudianteInscrito){
+    toast.error("El estudiante ya está inscrito al proyecto");
+  }
+  else{
+    crearInscripcion({
+          variables: {
+            proyecto: proyecto._id,
+            estudiante: userData._id,
+          },
+        });
+  }
+  }    
+
 
   return (
     <PrivateRoute roleList={["LIDER", "ADMINISTRADOR", "ESTUDIANTE"]}>
@@ -84,21 +78,14 @@ const IndexProyecto = () => {
           <PrivateComponent roleList={["ADMINISTRADOR", "LIDER"]}>
             <CardNew />
           </PrivateComponent>
-          {/* <PrivateComponent roleList={["ESTUDIANTE"]}>
-            {data && data.Proyectos.map((proyecto) => {
-              return (
-                <Card
-                  Key={proyecto._id}
-                  nombre={proyecto.nombre}
-                  lider={proyecto.lider?proyecto.lider.nombre:""}
-                  estado={proyecto.estado}
-                  fase={proyecto.fase}
-                />
-              );
-            })}
-          </PrivateComponent> */}
+         
           <PrivateComponent roleList={["LIDER", "ADMINISTRADOR","ESTUDIANTE"]}>
             {data && data.Proyectos.map((proyecto) => {
+              console.log("PROYECTOOO",proyecto);
+              const estudianteInscrito = proyecto.inscripciones.find(estudiante => estudiante.estudiante._id == _id )
+              if(estudianteInscrito){console.log("estudiante inscrito")}
+              else{console.log("no está inscrito")}
+              
               return (
                 <CardStudent
                   Key={proyecto._id}
@@ -106,7 +93,10 @@ const IndexProyecto = () => {
                   lider={proyecto.lider?proyecto.lider.nombre:""}
                   estado={proyecto.estado}
                   fase={proyecto.fase}
-                  onClick={() => Comprobar(proyecto._id)}
+                  hidden = {estudianteInscrito?true:false}
+                  onClick={() => {
+                    const proyectocomprobar = proyecto;
+                    Comprobar(proyectocomprobar);}}
                 />
               );
             })}

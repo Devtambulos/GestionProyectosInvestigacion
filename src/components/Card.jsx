@@ -30,7 +30,7 @@ export default function Card(props) {
               servicio o resultado único".{props.descripcion}
             </p>
           </div> */}
-          <div className="w-full py-2 text-gray text-sm h2 w-full flex items-center">
+          <div className="w-full py-2 text-gray text-sm h2 flex items-center">
             <IconFlag className="fill-current text-indigo-800 h-5 w-5 mr-1" />
             <p className="text-indigo-800">Lider</p>
             <p>: {props.lider}</p>
@@ -53,7 +53,7 @@ export default function Card(props) {
 
 export function CardStudent(props) {
   const { userData } = useUser();
-  console.log(userData);
+  // console.log(userData);
   return (
     <>
         <div key={props.Key} className="cursor-pointer shadow-DropDown rounded-xl p-4 w-full">
@@ -68,7 +68,7 @@ export function CardStudent(props) {
             <img className="h-52 rounded-lg object-cover" alt="" src={""}></img>
           </div>
           <h3 className="pt-2">{props.nombre}</h3>
-          <div className="w-full py-2 text-gray text-sm h2 w-full flex items-center">
+          <div className="w-full py-2 text-gray text-sm h2 flex items-center">
             <IconFlag className="fill-current text-indigo-800 h-5 w-5 mr-1" />
             <p className="text-indigo-800">Lider</p>
             <p>: {props.lider}</p>
@@ -89,8 +89,8 @@ export function CardStudent(props) {
           ?"bottom-0 hover:bg-indigo-400 justify-center rounded-lg bg-indigo-800 py-2 text-gray text-sm w-full flex items-center"
           :"hidden"}>
             <button
-            hidden = {props.hidden}
-            className="h-full w-full text-center text-white" onClick={props.onClick}>Inscribir{props.inscrito}</button>
+            // hidden = {props.hidden}
+            className="h-full w-full text-center text-white" onClick={props.hidden?null:props.onClick}>{props.hidden?"Ya estás inscrito":"Inscribir"}{props.inscrito}</button>
           </div>
         </div>
     </>
