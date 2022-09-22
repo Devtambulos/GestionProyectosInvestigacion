@@ -60,7 +60,7 @@ const Header = () => {
           <h1 className="font-bold text-3xl p-1 w-full text-center md:text-5xl">
             DevProject es el lugar indicado donde podrás gestionar tus proyectos
           </h1>
-          <p className="text-2xl  textTitulo w-full text-center p-5 md:text-3xl">
+          <p className="text-2xl  textTitulo w-full text-center p-5">
             ¡Facil y gratis!
           </p>
 
@@ -132,8 +132,6 @@ const Section = () => {
   );
 };
 
-
-//TODO: Cambiar info de devs para que se vea mas arreglado (en datosDevs.json)
 const CardsDesarrolladores = () => {
   return (
     <div className="flex flex-wrap justify-evenly p-4 bg-gradient-to-b from-gray-400 to-gray-900">
