@@ -27,7 +27,7 @@ const Logo = () => {
 
 const Redirigir = ({ irA, text }) => {
   return (
-    <button className={`mx-5 sm:mx-0 md:m-5 sm:px-3`}>
+    <button className={`mx-5 sm:mx-0 md:m-5 sm:px-3 sm:m-8`}>
       <Link
         className={`px-3 py-2 bg-indigo-700 rounded-md text-white hover:bg-indigo-500 hover:text-white font-semibold  `}
         to={irA}
@@ -44,9 +44,9 @@ const NavBar = () => {
       <div className="px-7 md:p-0">
         <Logo />
       </div>
-      <div className="px-6 py-3 md:p-0">
+      <div className="px-6 py-3 m-3 md:p-0">
         <Redirigir irA={'/auth/register'} text={'Registro'} />
-        <Redirigir irA={'/auth/login'} text={'Login'} />
+        <Redirigir irA={'/auth/login'} text={'Iniciar sesión'} />
       </div>
     </div>
   );
@@ -54,7 +54,7 @@ const NavBar = () => {
 
 const Header = () => {
   return (
-    <div className="bg-indigo-300 border-b border-solid border-black ">
+    <div className="bg-indigo-300 border-b border-solid border-black header">
       <header className="grid grid-cols-1 md:grid-cols-2">
         <div className="col-span-1 flex flex-wrap justify-center items-center p-5 md:row-span-1 ">
           <h1 className="font-bold text-3xl p-1 w-full text-center md:text-5xl">

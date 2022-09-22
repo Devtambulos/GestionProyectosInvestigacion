@@ -42,3 +42,6 @@ html {
   border-radius: 5%;
 }
 
+.header {
+  height: 100vh;
+}
